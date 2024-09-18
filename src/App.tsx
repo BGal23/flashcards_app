@@ -5,7 +5,7 @@ const App = () => {
     <>
       <BasicReactComponent />
       <br />
-      your code
+      your code 
     </>
   );
 };
