@@ -1,9 +1,11 @@
-import GenerateList from "./Learn/GenerateList/GenerateList";
+import BasicReactComponent from "./Learn/BasicReactComponent/BasicReactComponent";
 
 const App = () => {
   return (
     <>
-      <GenerateList />
+      <BasicReactComponent />
+      <br />
+      your code 
     </>
   );
 };
