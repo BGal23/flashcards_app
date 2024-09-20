@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { FixedSizeList } from "react-window";
+import { VariableSizeList } from "react-window";
+import image_1 from "../../images/375x210_744869dc-81ab-4bb7-9051-37e824929797.jpeg";
+import image_2 from "../../images/425x239_744869dc-81ab-4bb7-9051-37e824929797.jpeg";
+import image_3 from "../../images/700x394_744869dc-81ab-4bb7-9051-37e824929797.jpeg";
+import image_4 from "../../images/1000x563_744869dc-81ab-4bb7-9051-37e824929797.jpeg";
+import image_5 from "../../images/1300x731_744869dc-81ab-4bb7-9051-37e824929797.jpeg";
+const images = [image_1, image_2, image_3, image_4, image_5];
 
 type List = {
   id: number;
@@ -28,7 +34,12 @@ const GenerateList = () => {
   }: {
     index: number;
     style?: React.CSSProperties;
-  }) => <div style={{ ...style, height: 20 }}>Item {list[index].id}</div>;
+  }) => (
+    <div style={{ ...style }}>
+      <p>Item {list[index].id}</p>
+      <img src={images[2]} alt={`photo-${index}`} />
+    </div>
+  );
 
   const handleChangeNumber = (event: React.ChangeEvent<HTMLSelectElement>) => {
     resetList();
@@ -38,6 +49,13 @@ const GenerateList = () => {
   const handleChangeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
     resetList();
     setSelectedType(event.target.value);
+  };
+
+  const getItemSize = (index: number) => {
+    const imgHeights = [210, 239, 394, 563, 731];
+    const baseTextHeight = 54;
+    const imgHeight = imgHeights[index];
+    return baseTextHeight + imgHeight;
   };
 
   return (
@@ -78,31 +96,24 @@ const GenerateList = () => {
         </div>
       </div>
       <br />
-      <div
-        style={{
-          width: 300,
-          height: 500,
-          padding: 3,
-          border: "1px solid black",
-        }}
-      >
-        {selectedType === "normal" ? (
-          <div style={{ height: 500, width: "100%", overflowY: "auto" }}>
-            {list.map((element, index) => (
-              <Row key={element.id} index={index} />
-            ))}
-          </div>
-        ) : (
-          <FixedSizeList
-            height={500}
-            itemCount={list.length}
-            itemSize={20}
-            width={300}
-          >
-            {({ index, style }) => <Row index={index} style={style} />}
-          </FixedSizeList>
-        )}
-      </div>
+      {selectedType === "normal" ? (
+        <div style={{ width: "100%", overflowY: "auto" }}>
+          {list.map((element, index) => (
+            <Row key={element.id} index={index} />
+          ))}
+        </div>
+      ) : (
+        <VariableSizeList
+          height={1000}
+          itemCount={list.length}
+          itemSize={() => getItemSize(2)}
+          width="100%"
+        >
+          {({ index, style }) => {
+            return <Row index={index} style={style} />;
+          }}
+        </VariableSizeList>
+      )}
     </>
   );
 };
