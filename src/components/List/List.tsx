@@ -1,7 +1,9 @@
 import { IListProps } from "../../types/props";
+import useStyles from "./styles";
 
 const List: React.FC<IListProps> = () => {
-  return <>List</>;
+  const classes = useStyles();
+  return <div className={classes.container}>List</div>;
 };
 
 export default List;

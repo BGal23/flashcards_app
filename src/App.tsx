@@ -4,6 +4,7 @@ import Learn from "./components/Learn/Learn";
 import Settings from "./components/Settings/Settings";
 import List from "./components/List/List";
 import Translate from "./components/Translate/Translate";
+import Add from "./components/Add/Add";
 
 const App = () => {
   const [mainView, setMainView] = useState<string>("learn");
@@ -11,19 +12,19 @@ const App = () => {
   const changeMainView = (mainView: string) => {
     switch (mainView) {
       case "learn":
-        return <Learn />;
+        return <Learn test="temp" />;
 
       case "list":
-        return <List />;
+        return <List test="temp" />;
 
       case "translate":
-        return <Translate />;
+        return <Translate test="temp" />;
 
-      case "download":
-        return <h3>Coming soon</h3>;
+      case "add":
+        return <Add test="temp" />;
 
       case "settings":
-        return <Settings />;
+        return <Settings test="temp" />;
     }
   };
 
