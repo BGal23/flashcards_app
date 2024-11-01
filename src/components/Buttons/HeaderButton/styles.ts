@@ -1,4 +1,5 @@
 import { createStyles, makeStyles } from "@mui/styles";
+import color from "../../../assets/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -6,11 +7,11 @@ const useStyles = makeStyles(() =>
       height: "4em",
       width: "4em",
       border: "none",
-      background: "#7ac70c",
-      boxShadow: "0.15em 0.3em 0px 0px #6f6f6f",
+      background: color.headerButton,
+      boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
       borderRadius: "0.5em",
       display: "flex",
-      justifyContent: "space-around",
+      justifyContent: "center",
       alignItems: "center",
       transition: "background 0.2s ease",
     },

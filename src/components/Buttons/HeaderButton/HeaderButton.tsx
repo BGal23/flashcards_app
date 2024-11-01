@@ -1,5 +1,6 @@
 import { IHeaderButtonProps } from "../../../types/props";
 import useStyles from "./styles";
+import color from "../../../assets/colors";
 
 const HeaderButton: React.FC<IHeaderButtonProps> = ({
   setMainView,
@@ -13,7 +14,10 @@ const HeaderButton: React.FC<IHeaderButtonProps> = ({
     <button
       className={classes.container}
       onClick={() => setMainView(activate)}
-      style={{ background: mainView === activate ? " #faa918" : "#7ac70c" }}
+      style={{
+        background:
+          mainView === activate ? color.activateButton : color.headerButton,
+      }}
     >
       {icon}
     </button>

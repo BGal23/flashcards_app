@@ -14,31 +14,31 @@ const Header: React.FC<IHeaderProps> = ({ setMainView, mainView }) => {
         setMainView={setMainView}
         mainView={mainView}
         activate={"learn"}
-        icon={<FaBook size={"2.5em"} />}
+        icon={<FaBook size={"2.5em"} color="black" />}
       />
       <HeaderButton
         setMainView={setMainView}
         mainView={mainView}
         activate={"add"}
-        icon={<FaPlusCircle size={"2.5em"} />}
-      />
-      <HeaderButton
-        setMainView={setMainView}
-        mainView={mainView}
-        activate={"translate"}
-        icon={<MdGTranslate size={"2.5em"} />}
+        icon={<FaPlusCircle size={"2.5em"} color="black" />}
       />
       <HeaderButton
         setMainView={setMainView}
         mainView={mainView}
         activate={"list"}
-        icon={<FaClipboardList size={"2.5em"} />}
+        icon={<FaClipboardList size={"2.5em"} color="black" />}
+      />
+      <HeaderButton
+        setMainView={setMainView}
+        mainView={mainView}
+        activate={"translate"}
+        icon={<MdGTranslate size={"2.5em"} color="black" />}
       />
       <HeaderButton
         setMainView={setMainView}
         mainView={mainView}
         activate={"settings"}
-        icon={<FaGear size={"2.5em"} />}
+        icon={<FaGear size={"2.5em"} color="black" />}
       />
     </div>
   );

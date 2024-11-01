@@ -1,10 +1,11 @@
 import { createStyles, makeStyles } from "@mui/styles";
+import color from "../../assets/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
     container: {
       height: "4em",
-      background: "#8ee000",
+      background: color.header,
       padding: "0.5em 1em 0.5em",
       display: "flex",
       justifyContent: "space-around",
