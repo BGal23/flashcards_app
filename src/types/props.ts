@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IWordsObject } from "./data";
+import { IObject } from "./data";
 
 export interface IHeaderProps {
   setMainView: (mainView: string) => void;
@@ -43,7 +43,7 @@ export interface IAddInputProps {
 }
 
 export interface IAddButtonProps {
-  dataObject: IWordsObject | undefined;
+  dataObject: IObject | undefined;
   clearData: (clear: boolean) => void;
   activate: (isActivate: boolean) => void;
   isWordsValidated: boolean;
