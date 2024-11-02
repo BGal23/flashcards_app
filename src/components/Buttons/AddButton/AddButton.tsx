@@ -1,7 +1,7 @@
 import { IAddButtonProps } from "../../../types/props";
 import { FaPlusCircle } from "react-icons/fa";
 import useStyles from "./styles";
-import addToMemory from "../../../utils/addToMemory";
+import { addToMemory } from "../../../utils/localStorage";
 import { useState } from "react";
 
 const AddButton: React.FC<IAddButtonProps> = ({
@@ -34,7 +34,11 @@ const AddButton: React.FC<IAddButtonProps> = ({
   return (
     <div className={classes.buttonWrapper}>
       {result}
-      <button className={classes.button} onClick={() => sendData()}>
+      <button
+        type="button"
+        className={classes.button}
+        onClick={() => sendData()}
+      >
         Add word <FaPlusCircle size={"2em"} color="black" />
       </button>
     </div>

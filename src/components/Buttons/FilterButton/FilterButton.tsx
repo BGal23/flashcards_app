@@ -1,10 +1,10 @@
-import { IHeaderButtonProps } from "../../../types/props";
+import { IFilterButtonProps } from "../../../types/props";
 import useStyles from "./styles";
 import color from "../../../assets/colors";
 
-const HeaderButton: React.FC<IHeaderButtonProps> = ({
-  setMainView,
-  mainView,
+const FilterButton: React.FC<IFilterButtonProps> = ({
+  usedFilter,
+  setUsedFilter,
   activate,
   icon,
 }) => {
@@ -14,10 +14,10 @@ const HeaderButton: React.FC<IHeaderButtonProps> = ({
     <button
       type="button"
       className={classes.container}
-      onClick={() => setMainView(activate)}
+      onClick={() => setUsedFilter(activate)}
       style={{
         background:
-          mainView === activate ? color.activateButton : color.headerButton,
+          usedFilter === activate ? color.activateButton : color.headerButton,
       }}
     >
       {icon}
@@ -25,4 +25,4 @@ const HeaderButton: React.FC<IHeaderButtonProps> = ({
   );
 };
 
-export default HeaderButton;
+export default FilterButton;

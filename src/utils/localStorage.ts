@@ -1,9 +1,7 @@
 import { IFinalObject, IObject } from "../types/data";
 import { v4 as uuidv4 } from "uuid";
 
-const addToMemory = (object: IObject | undefined) => {
-  console.log(object);
-
+export const addToMemory = (object: IObject | undefined) => {
   if (object) {
     const existingData = getFromLocalStorage("data") || [];
     if (
@@ -39,7 +37,7 @@ const saveToLocalStorage = (key: string, value: IObject[]) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-const getFromLocalStorage = (key: string) => {
+export const getFromLocalStorage = (key: string) => {
   const item = localStorage.getItem(key);
   return item ? JSON.parse(item) : null;
 };
@@ -47,5 +45,3 @@ const getFromLocalStorage = (key: string) => {
 const generateUuid = (): string => {
   return uuidv4();
 };
-
-export default addToMemory;

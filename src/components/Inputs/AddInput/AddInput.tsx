@@ -24,6 +24,7 @@ const AddInput: React.FC<IAddInputProps> = ({
         />
       ) : (
         <input
+          type="text"
           className={classes.input}
           placeholder={placeholder}
           maxLength={30}

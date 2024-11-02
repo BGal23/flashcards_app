@@ -15,7 +15,7 @@ const App = () => {
         return <Learn test="temp" />;
 
       case "list":
-        return <List test="temp" />;
+        return <List />;
 
       case "translate":
         return <Translate test="temp" />;

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IObject } from "./data";
+import { IFinalObject, IObject } from "./data";
 
 export interface IHeaderProps {
   setMainView: (mainView: string) => void;
@@ -17,8 +17,30 @@ export interface IAddProps {
   test: string;
 }
 
-export interface IListProps {
-  test: string;
+// export interface IListProps {
+//   setUsedFilter: (usedFilter: string) => void;
+//   usedFilter: string;
+// }
+
+export interface IListElementProps {
+  element: IFinalObject;
+}
+
+export interface ISearchInputProps {
+  searchedWord: string;
+  setSearchedWord: (searchWord: string) => void;
+}
+
+export interface IFiltersProps {
+  setUsedFilter: (usedFilter: string) => void;
+  usedFilter: string;
+}
+
+export interface IFilterButtonProps {
+  setUsedFilter: (usedFilter: string) => void;
+  usedFilter: string;
+  activate: string;
+  icon: ReactNode;
 }
 
 export interface ILearnProps {

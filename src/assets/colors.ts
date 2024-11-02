@@ -5,6 +5,7 @@ const color = {
   shadow: "#6f6f6f",
   error: "#e53838dd",
   fontWhite: "#fff",
+  fontGrey: "#cfcfcf",
 };
 
 export default color;
