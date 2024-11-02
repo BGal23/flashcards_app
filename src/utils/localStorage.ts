@@ -45,3 +45,13 @@ export const getFromLocalStorage = (key: string) => {
 const generateUuid = (): string => {
   return uuidv4();
 };
+
+export const removeItemFromLocalStorageById = (key: string, id: string) => {
+  const item = localStorage.getItem(key);
+
+  if (item) {
+    const array = JSON.parse(item);
+    const updatedArray = array.filter((item: IFinalObject) => item.id !== id);
+    localStorage.setItem(key, JSON.stringify(updatedArray));
+  }
+};

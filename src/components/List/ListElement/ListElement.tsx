@@ -4,9 +4,10 @@ import { FaEdit } from "react-icons/fa";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
 import color from "../../../assets/colors";
+import { removeItemFromLocalStorageById } from "../../../utils/localStorage";
 
 const ListElement: React.FC<IListElementProps> = ({
-  element: { original, learning, isActive },
+  element: { id, original, learning, isActive },
 }) => {
   const label = {
     id: "custom-checkbox",
@@ -35,7 +36,11 @@ const ListElement: React.FC<IListElementProps> = ({
         <button type="button" className={classes.button}>
           <FaEdit size={"1.5em"} color={"black"} />
         </button>
-        <button type="button" className={classes.button}>
+        <button
+          type="button"
+          className={classes.button}
+          onClick={() => removeItemFromLocalStorageById("data", id)}
+        >
           <MdDelete size={"2em"} color={"black"} />
         </button>
       </div>
