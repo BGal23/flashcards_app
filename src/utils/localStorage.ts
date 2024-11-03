@@ -55,3 +55,24 @@ export const removeItemFromLocalStorageById = (key: string, id: string) => {
     localStorage.setItem(key, JSON.stringify(updatedArray));
   }
 };
+
+export const changeItemFromLocalStorageById = (key: string, id: string) => {
+  const item = localStorage.getItem(key);
+
+  if (item) {
+    const array: IFinalObject[] = JSON.parse(item);
+    const object: IFinalObject | undefined = array.find(
+      (item: IFinalObject) => item.id === id
+    );
+    const index = array.findIndex((item: IFinalObject) => item.id === id);
+    if (object) {
+      const isActive = object.isActive;
+      object.isActive = !isActive;
+      array.splice(index, 1, object);
+
+      localStorage.setItem(key, JSON.stringify(array));
+    } else {
+      console.error("searched object doesn't exist!");
+    }
+  }
+};
