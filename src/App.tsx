@@ -1,13 +1,18 @@
-import { useState } from "react";
 import Header from "./components/Header/Header";
 import Learn from "./components/Learn/Learn";
 import Settings from "./components/Settings/Settings";
 import List from "./components/List/List";
 import Translate from "./components/Translate/Translate";
 import Add from "./components/Add/Add";
+import useSaveScreen from "./hooks/useSaveScreen";
+import { useEffect } from "react";
 
 const App = () => {
-  const [mainView, setMainView] = useState<string>("learn");
+  const [mainView, setMainView] = useSaveScreen("screen", "learn");
+
+  useEffect(() => {
+    setMainView(mainView);
+  });
 
   const changeMainView = (mainView: string) => {
     switch (mainView) {

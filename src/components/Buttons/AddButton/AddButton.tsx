@@ -3,6 +3,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import useStyles from "./styles";
 import { addToMemory } from "../../../utils/localStorage";
 import { useState } from "react";
+import color from "../../../assets/colors";
 
 const AddButton: React.FC<IAddButtonProps> = ({
   activate,
@@ -21,7 +22,14 @@ const AddButton: React.FC<IAddButtonProps> = ({
         );
       } else {
         clearData(true);
-        setResult(<div className={classes.susses}>Done!</div>);
+        setResult(
+          <div
+            className={classes.error}
+            style={{ background: color.headerButton }}
+          >
+            Done!
+          </div>
+        );
       }
     } else {
       setResult(

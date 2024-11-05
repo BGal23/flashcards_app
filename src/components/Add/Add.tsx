@@ -4,11 +4,16 @@ import AddButton from "../Buttons/AddButton/AddButton";
 import AddInput from "../Inputs/AddInput/AddInput";
 import useStyles from "./styles";
 import validateWord from "../../utils/validateWord";
+import { TbAlphabetLatin, TbAlphabetGreek } from "react-icons/tb";
+import { Slider } from "@mui/material";
+import { FaThumbsUp, FaThumbsDown } from "react-icons/fa6";
+import color from "../../assets/colors";
 
 const Add: React.FC<IAddProps> = () => {
   const [originalWord, setOriginalWord] = useState<string>("");
   const [learningWord, setLearningWord] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [scale, setScale] = useState<number>(0);
   const [isAddButtonActive, setIsAddButtonActive] = useState<boolean>(false);
   const [isWordsValidated, setIsWordsValidated] = useState<boolean>(false);
   const classes = useStyles();
@@ -29,6 +34,7 @@ const Add: React.FC<IAddProps> = () => {
       setOriginalWord("");
       setLearningWord("");
       setDescription("");
+      setScale(0);
       setIsAddButtonActive(false);
       return;
     }
@@ -38,40 +44,56 @@ const Add: React.FC<IAddProps> = () => {
     originalWord: originalWord,
     learningWord: learningWord,
     description: description,
-    scale: 0,
+    scale: scale,
   };
 
   return (
     <div className={classes.container}>
       <AddInput
-        title={"Word in your origin language:"}
-        placeholder={"pies"}
+        placeholder={"Your language..."}
         isDescription={false}
         value={originalWord}
         changeValue={setOriginalWord}
         error={(isAddButtonActive && validateWord(originalWord)) || ""}
+        icon={<TbAlphabetLatin size={"3em"} color={"black"} />}
       />
       <AddInput
-        title={"Word in the language you are learning:"}
-        placeholder={"dog"}
+        placeholder={"Translate..."}
         isDescription={false}
         value={learningWord}
         changeValue={setLearningWord}
         error={(isAddButtonActive && validateWord(learningWord)) || ""}
+        icon={<TbAlphabetGreek size={"3em"} color={"black"} />}
       />
       <AddInput
-        title={"Description (optional):"}
-        placeholder={"animal, pet"}
+        placeholder={"Description (optional)"}
         isDescription={true}
         value={description}
         changeValue={setDescription}
       />
-      <AddButton
-        dataObject={dataObject}
-        clearData={clearData}
-        isWordsValidated={isWordsValidated}
-        activate={setIsAddButtonActive}
-      />
+      <div className={classes.sliderWrapper}>
+        <div className={classes.slider}>
+          <FaThumbsDown size={"2em"} color={"red"} />
+          <Slider
+            value={scale}
+            defaultValue={0}
+            onChange={(_event: Event, newValue: number | number[]) =>
+              setScale(newValue as number)
+            }
+            step={15}
+            min={-30}
+            max={30}
+            sx={{ color: color.shadow }}
+          />
+          <FaThumbsUp size={"2em"} color={color.headerButton} />
+        </div>
+        <AddButton
+          dataObject={dataObject}
+          clearData={clearData}
+          isWordsValidated={isWordsValidated}
+          activate={setIsAddButtonActive}
+        />
+      </div>
     </div>
   );
 };

@@ -10,12 +10,20 @@ const useStyles = makeStyles(() =>
       gap: "0.5em",
     },
     input: {
-      margin: "0 1em 0",
       padding: "0 0 0 1em",
       height: "3em",
       borderRadius: "2em",
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      width: "100%",
+    },
+    inputWrapper: {
+      margin: "0 1em 0",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      width: "calc(100% - 2em)",
+      gap: "0.2em",
     },
     textarea: {
       margin: "0 1em 0",

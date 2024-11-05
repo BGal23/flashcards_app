@@ -56,12 +56,12 @@ export interface ITranslateProps {
 }
 
 export interface IAddInputProps {
-  title: string;
   placeholder: string;
   isDescription: boolean;
   value: string;
   changeValue: (value: string) => void;
   error?: string;
+  icon?: ReactNode;
 }
 
 export interface IAddButtonProps {

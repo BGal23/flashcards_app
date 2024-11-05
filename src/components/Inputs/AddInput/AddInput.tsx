@@ -2,7 +2,7 @@ import { IAddInputProps } from "../../../types/props";
 import useStyles from "./styles";
 
 const AddInput: React.FC<IAddInputProps> = ({
-  title,
+  icon,
   placeholder,
   isDescription,
   value,
@@ -13,7 +13,6 @@ const AddInput: React.FC<IAddInputProps> = ({
 
   return (
     <div className={classes.container}>
-      <span>{title}</span>
       {isDescription ? (
         <textarea
           className={classes.textarea}
@@ -23,14 +22,17 @@ const AddInput: React.FC<IAddInputProps> = ({
           onChange={(event) => changeValue(event.target.value)}
         />
       ) : (
-        <input
-          type="text"
-          className={classes.input}
-          placeholder={placeholder}
-          maxLength={30}
-          value={value}
-          onChange={(event) => changeValue(event.target.value)}
-        />
+        <span className={classes.inputWrapper}>
+          {icon}
+          <input
+            type="text"
+            className={classes.input}
+            placeholder={placeholder}
+            maxLength={30}
+            value={value}
+            onChange={(event) => changeValue(event.target.value)}
+          />
+        </span>
       )}
       <div className={classes.errorWrapper}>
         {error && <span className={classes.error}>{error}</span>}

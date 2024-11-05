@@ -3,15 +3,15 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
-import color from "../../../assets/colors";
 import {
   changeItemFromLocalStorageById,
   removeItemFromLocalStorageById,
 } from "../../../utils/localStorage";
 import { useState } from "react";
+import scaleItemColor from "../../../utils/scaleItemColor";
 
 const ListElement: React.FC<IListElementProps> = ({
-  element: { id, original, learning, isActive },
+  element: { id, original, learning, isActive, scale },
 }) => {
   const [isDelete, setIsDelete] = useState(false);
   const [isActiveState, setIsActiveState] = useState<boolean>(isActive);
@@ -29,7 +29,10 @@ const ListElement: React.FC<IListElementProps> = ({
   return (
     <div
       className={classes.container}
-      style={{ display: isDelete ? "none" : "flex" }}
+      style={{
+        display: isDelete ? "none" : "flex",
+        background: scaleItemColor(scale),
+      }}
     >
       <div className={classes.wordsWrapper}>
         <span>{original}</span>
@@ -38,11 +41,10 @@ const ListElement: React.FC<IListElementProps> = ({
       <div className={classes.buttonsWrapper}>
         <Checkbox
           {...label}
-          defaultChecked
           sx={{
             "& .MuiSvgIcon-root": {
               fontSize: "2em",
-              color: color.fontGrey,
+              color: "black",
               margin: -1.3,
             },
           }}
