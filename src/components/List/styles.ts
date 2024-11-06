@@ -18,6 +18,13 @@ const useStyles = makeStyles(() =>
       margin: "0 0.5em 0",
       overflow: "scroll",
     },
+    emptyArray: {
+      height: "3em",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "1em",
+    },
   })
 );
 

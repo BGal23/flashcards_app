@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-// import { IListProps } from "../../types/props";
 import Filters from "../Filters/Filters";
 import SearchInput from "../Inputs/SearchInput/SearchInput";
 import useStyles from "./styles";
 import { getFromLocalStorage } from "../../utils/localStorage";
 import { IFinalObject } from "../../types/data";
 import ListElement from "./ListElement/ListElement";
-
-// : React.FC<IListProps>
 
 const List = () => {
   const [usedFilter, setUsedFilter] = useState<string>("");
@@ -64,13 +61,17 @@ const List = () => {
       />
       <Filters usedFilter={usedFilter} setUsedFilter={setUsedFilter} />
       <div className={classes.listWrapper}>
-        {searchedList.length > 0
-          ? searchedList.map((element: IFinalObject) => (
-              <div key={element.id}>
-                <ListElement element={element} />
-              </div>
-            ))
-          : "loading"}
+        {searchedList.length > 0 ? (
+          searchedList.map((element: IFinalObject) => (
+            <div key={element.id}>
+              <ListElement element={element} />
+            </div>
+          ))
+        ) : (
+          <div className={classes.emptyArray}>
+            <span>Add words to list</span>
+          </div>
+        )}
       </div>
     </div>
   );

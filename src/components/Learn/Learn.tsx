@@ -9,9 +9,14 @@ const Learn: React.FC<ILearnProps> = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    const fetchWord = async () => {
+    const fetchWord = async (key: string) => {
+      const storageWord = localStorage.getItem(key);
       const newWord = await wordDraw();
-      if (newWord !== null) {
+
+      if (storageWord !== null) {
+        setWord(JSON.parse(storageWord));
+      } else if (newWord !== null) {
+        localStorage.setItem(key, JSON.stringify(newWord));
         setWord(newWord);
         setIsArrayEmpty(false);
       } else {
@@ -19,7 +24,7 @@ const Learn: React.FC<ILearnProps> = () => {
       }
     };
 
-    fetchWord();
+    fetchWord("currentWord");
   }, []);
 
   return (
