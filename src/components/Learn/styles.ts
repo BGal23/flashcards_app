@@ -7,6 +7,12 @@ const useStyles = makeStyles(() =>
       display: "flex",
       flexDirection: "column",
     },
+    mainWord: {
+      width: "100%",
+      textAlign: "center",
+      fontSize: "2em",
+      marginBottom: "0.5em",
+    },
   })
 );
 

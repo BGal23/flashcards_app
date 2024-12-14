@@ -1,36 +1,36 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-const useCurrentWord = (
-  key: string,
-  currentWord: string
-): [string, React.Dispatch<React.SetStateAction<string>>] => {
-  const [value, setValue] = useState<string>("");
+// const useCurrentWord = (
+//   key: string,
+//   currentWord: string
+// ): [string, React.Dispatch<React.SetStateAction<string>>] => {
+//   const [value, setValue] = useState<string>("");
 
-  useEffect(() => {
-    const getWordFromLocalStorage = async () => {
-      const JSONstorageWord = localStorage.getItem(key);
+//   useEffect(() => {
+//     const getWordFromLocalStorage = async () => {
+//       const JSONstorageWord = localStorage.getItem(key);
 
-      if (JSONstorageWord !== null) {
-        const storageWord = JSON.parse(JSONstorageWord);
+//       if (JSONstorageWord !== null) {
+//         const storageWord = JSON.parse(JSONstorageWord);
 
-        console.log(storageWord, "storage");
+//         console.log(storageWord, "storage");
 
-        setValue(storageWord);
-      }
-    };
+//         setValue(storageWord);
+//       }
+//     };
 
-    getWordFromLocalStorage();
-  }, [key]);
+//     getWordFromLocalStorage();
+//   }, [key]);
 
-  console.log(currentWord, "current");
+//   console.log(currentWord, "current");
 
-  // useEffect(() => {
-  //   console.log(value);
+//   // useEffect(() => {
+//   //   console.log(value);
 
-  //   localStorage.setItem(key, JSON.stringify(value));
-  // }, [key, value]);
+//   //   localStorage.setItem(key, JSON.stringify(value));
+//   // }, [key, value]);
 
-  return [value, setValue];
-};
+//   return [value, setValue];
+// };
 
-export default useCurrentWord;
+// export default useCurrentWord;

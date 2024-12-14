@@ -6,8 +6,10 @@ const wordDraw = async () => {
   if (!array || array.length === 0) {
     return null;
   }
-  const randomNumber: number = getRandomNumber(array.length);
-  return array[randomNumber].original;
+  const onlyActiveWords = array.filter((element) => element.isActive === true);
+
+  const randomNumber: number = getRandomNumber(onlyActiveWords.length);
+  return onlyActiveWords[randomNumber];
 };
 
 const getRandomNumber = (n: number) => {
