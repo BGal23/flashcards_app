@@ -14,14 +14,15 @@ const useStyles = makeStyles(() =>
       marginLeft: "1.6em",
       width: "100%",
       padding: "0 0 0 1em",
-      height: "3em",
+      height: "2em",
       borderRadius: "2em",
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
     },
-    iconWrapper: {
+    iconIcon: {
       position: "relative",
       right: "2.2em",
+      top: "0.1em",
     },
   })
 );

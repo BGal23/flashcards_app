@@ -11,8 +11,8 @@ const useStyles = makeStyles(() =>
     },
     input: {
       padding: "0 0 0 1em",
-      height: "3em",
-      borderRadius: "2em",
+      height: "2em",
+      borderRadius: "1em",
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
       width: "100%",
@@ -29,17 +29,19 @@ const useStyles = makeStyles(() =>
       margin: "0 1em 0",
       padding: "1em",
       height: "5em",
-      borderRadius: "2em",
+      borderRadius: "1.5em",
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      fontSize: "medium",
     },
     errorWrapper: {
       position: "relative",
       bottom: "1em",
       height: "1em",
-      marginBottom: "-1em",
+      marginBottom: "-1.2em",
       display: "flex",
       justifyContent: "end",
+      top: "-2em",
     },
     error: {
       height: "100%",
@@ -48,6 +50,7 @@ const useStyles = makeStyles(() =>
       background: color.error,
       borderRadius: "1em",
       boxShadow: `0.1em 0.2em 0px 0px ${color.shadow}`,
+      fontSize: "0.8em",
     },
   })
 );

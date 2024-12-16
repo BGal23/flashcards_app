@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ILearnProps } from "../../types/props";
 import useStyles from "./styles";
 import wordDraw from "../../utils/wordDraw";
@@ -6,14 +6,17 @@ import { IFinalObject } from "../../types/data";
 import addPoint from "../../utils/addPoint";
 import CheckInput from "../Inputs/CheckInput/CheckInput";
 import SpinnerButton from "../Buttons/SpinnerButton/SpinnerButton";
+import color from "../../assets/colors";
+import CheckButton from "../Buttons/CheckButton/CheckButton";
 
 const Learn: React.FC<ILearnProps> = () => {
   const [word, setWord] = useState<IFinalObject>();
   const [isArrayEmpty, setIsArrayEmpty] = useState<boolean>(false);
   const [inputPlace, setInputPlace] = useState<string>("");
-  // const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [colorAnswer, setColorAnswer] = useState<string>("");
   const [isShowInfo, setIsShowInfo] = useState<boolean>(false);
   const classes = useStyles();
+  const timerID = useRef<number | null>(null);
 
   const fetchWord = async (key: string, restart: boolean) => {
     const storageWord = localStorage.getItem(key);
@@ -35,27 +38,28 @@ const Learn: React.FC<ILearnProps> = () => {
     fetchWord("currentWord", false);
   }, []);
 
-  let timerID: number | null = null;
-
   const wordCheck = (
     word: IFinalObject | undefined,
     yourTranslation: string
   ) => {
     if (word) {
       setIsShowInfo(true);
-      if (word.learning === yourTranslation) {
+      if (
+        word.learning.toLocaleLowerCase() ===
+        yourTranslation.toLocaleLowerCase()
+      ) {
         addPoint(word.id, true);
-
-        console.log("Correct");
+        setColorAnswer(color.headerButton);
       } else {
         addPoint(word.id, false);
-        console.log("Not correct");
+        setColorAnswer(color.error);
       }
-      if (timerID) clearTimeout(timerID);
 
-      timerID = setTimeout(() => {
+      if (timerID.current !== null) clearTimeout(timerID.current);
+
+      timerID.current = window.setTimeout(() => {
         restartWord();
-      }, 3000);
+      }, 5000);
 
       setInputPlace("");
     } else {
@@ -64,9 +68,9 @@ const Learn: React.FC<ILearnProps> = () => {
   };
 
   const restartWord = () => {
-    if (timerID) {
-      clearTimeout(timerID);
-      timerID = null;
+    if (timerID.current !== null) {
+      clearTimeout(timerID.current);
+      timerID.current = null;
     }
 
     fetchWord("currentWord", true);
@@ -75,22 +79,35 @@ const Learn: React.FC<ILearnProps> = () => {
 
   return (
     <div className={classes.container}>
-      {/* <div style={{ display: isShowInfo ? "block" : "none" }}>SHOW</div> */}
       <div className={classes.mainWord}>
-        {isArrayEmpty ? "Sorry :(" : word?.original}
+        {isArrayEmpty
+          ? "Sorry :("
+          : isShowInfo
+          ? word?.learning
+          : word?.original}
       </div>
       {isShowInfo ? (
-        <SpinnerButton restartWord={restartWord} />
+        <SpinnerButton restartWord={restartWord} color={colorAnswer} />
       ) : (
-        <CheckInput checkedWord={inputPlace} setCheckedWord={setInputPlace} />
+        <>
+          <CheckInput checkedWord={inputPlace} setCheckedWord={setInputPlace} />
+
+          <div className={classes.buttonsWrapper}>
+            <CheckButton
+              isDisabled={false}
+              wordCheck={() => wordCheck(word, inputPlace)}
+              title="Skip"
+              color={color.error}
+            />
+            <CheckButton
+              isDisabled={inputPlace.length <= 0}
+              wordCheck={() => wordCheck(word, inputPlace)}
+              title="Check"
+              color={color.headerButton}
+            />
+          </div>
+        </>
       )}
-      <button
-        disabled={inputPlace.length <= 0}
-        type="button"
-        onClick={() => wordCheck(word, inputPlace)}
-      >
-        Check!
-      </button>
     </div>
   );
 };

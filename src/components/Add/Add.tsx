@@ -71,29 +71,27 @@ const Add: React.FC<IAddProps> = () => {
         value={description}
         changeValue={setDescription}
       />
-      <div className={classes.sliderWrapper}>
-        <div className={classes.slider}>
-          <FaThumbsDown size={"2em"} color={"red"} />
-          <Slider
-            value={scale}
-            defaultValue={0}
-            onChange={(_event: Event, newValue: number | number[]) =>
-              setScale(newValue as number)
-            }
-            step={15}
-            min={-30}
-            max={30}
-            sx={{ color: color.shadow }}
-          />
-          <FaThumbsUp size={"2em"} color={color.headerButton} />
-        </div>
-        <AddButton
-          dataObject={dataObject}
-          clearData={clearData}
-          isWordsValidated={isWordsValidated}
-          activate={setIsAddButtonActive}
+      <div className={classes.slider}>
+        <FaThumbsDown size={"2em"} color={"red"} />
+        <Slider
+          value={scale}
+          defaultValue={0}
+          onChange={(_event: Event, newValue: number | number[]) =>
+            setScale(newValue as number)
+          }
+          step={15}
+          min={-30}
+          max={30}
+          sx={{ color: color.shadow }}
         />
+        <FaThumbsUp size={"2em"} color={color.headerButton} />
       </div>
+      <AddButton
+        dataObject={dataObject}
+        clearData={clearData}
+        isWordsValidated={isWordsValidated}
+        activate={setIsAddButtonActive}
+      />
     </div>
   );
 };

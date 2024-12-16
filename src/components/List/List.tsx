@@ -48,9 +48,7 @@ const List = () => {
   }, [searchedWord, list]);
 
   useEffect(() => {
-    if (usedFilter) {
-      sortList(usedFilter);
-    }
+    if (usedFilter) sortList(usedFilter);
   }, [usedFilter]);
 
   return (
@@ -69,7 +67,7 @@ const List = () => {
           ))
         ) : (
           <div className={classes.emptyArray}>
-            <span>Add words to list</span>
+            <span>Your list is empty</span>
           </div>
         )}
       </div>

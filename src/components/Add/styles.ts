@@ -8,14 +8,8 @@ const useStyles = makeStyles(() =>
       flexDirection: "column",
       gap: "0.7em",
     },
-    sliderWrapper: {
-      width: "calc(100% - 1em)",
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-    },
     slider: {
-      width: "100%",
+      width: "calc(100% - 2em)",
       display: "flex",
       flexDirection: "row",
       alignItems: "center",

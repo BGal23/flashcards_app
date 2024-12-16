@@ -2,7 +2,7 @@ import { IAddButtonProps } from "../../../types/props";
 import { FaPlusCircle } from "react-icons/fa";
 import useStyles from "./styles";
 import { addToMemory } from "../../../utils/localStorage";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import color from "../../../assets/colors";
 
 const AddButton: React.FC<IAddButtonProps> = ({
@@ -11,37 +11,46 @@ const AddButton: React.FC<IAddButtonProps> = ({
   clearData,
   isWordsValidated,
 }) => {
-  const [result, setResult] = useState<JSX.Element>();
+  const [result, setResult] = useState<string>();
+  const [isShowInfo, setIsShowInfo] = useState<boolean>(false);
+  const [errorColor, setErrorColor] = useState<boolean>(true);
   const classes = useStyles();
+  const timerID = useRef<number | null>(null);
 
   const sendData = () => {
+    setIsShowInfo(true);
     if (isWordsValidated) {
       if (!addToMemory(dataObject)) {
-        setResult(
-          <div className={classes.error}>This word exist in your list</div>
-        );
+        setErrorColor(true);
+        setResult("This word exist in your list");
       } else {
+        setErrorColor(false);
         clearData(true);
-        setResult(
-          <div
-            className={classes.error}
-            style={{ background: color.headerButton }}
-          >
-            Done!
-          </div>
-        );
+        setResult("You added a new word");
       }
     } else {
-      setResult(
-        <div className={classes.error}>Fill in the required fields</div>
-      );
+      setErrorColor(true);
+      setResult("Fill in the required fields");
       activate(true);
     }
+
+    if (timerID.current !== null) clearTimeout(timerID.current);
+    timerID.current = setTimeout(() => {
+      setIsShowInfo(false);
+    }, 3000);
   };
 
   return (
     <div className={classes.buttonWrapper}>
-      {result}
+      <div
+        className={classes.error}
+        style={{
+          display: isShowInfo ? "block" : "none",
+          background: errorColor ? color.error : color.headerButton,
+        }}
+      >
+        {result}
+      </div>
       <button
         type="button"
         className={classes.button}

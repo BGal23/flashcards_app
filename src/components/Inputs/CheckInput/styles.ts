@@ -11,13 +11,14 @@ const useStyles = makeStyles(() =>
       marginBottom: "1em",
     },
     input: {
-      margin: "0 3em 0",
-      width: "calc(100% - 6em)",
+      margin: "0 1em 0",
+      width: "calc(100% - 2em)",
       padding: "0 0 0 1em",
-      height: "3em",
+      height: "2em",
       borderRadius: "2em",
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      fontSize: "1.5em",
     },
   })
 );

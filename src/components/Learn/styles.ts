@@ -13,6 +13,10 @@ const useStyles = makeStyles(() =>
       fontSize: "2em",
       marginBottom: "0.5em",
     },
+    buttonsWrapper: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
   })
 );
 

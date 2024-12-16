@@ -1,4 +1,15 @@
 body {
   margin: 0;
   background-color: blanchedalmond;
+  font-family: "Lucida Grande", Verdana, sans-serif;
+}
+
+button {
+  padding: 0;
+  color: black;
+  font-family: "Lucida Grande", Verdana, sans-serif;
+}
+
+input {
+  font-size: large;
 }

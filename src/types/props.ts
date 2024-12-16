@@ -56,8 +56,14 @@ export interface IAddInputProps {
 
 //BUTTONS
 
+export interface IDeleteButtonProps {
+  isShown: boolean;
+  setIsShown: (isShown: boolean) => void;
+}
+
 export interface ISpinnerButtonProps {
   restartWord: () => void;
+  color: string;
 }
 
 export interface IAddButtonProps {
@@ -65,6 +71,13 @@ export interface IAddButtonProps {
   clearData: (clear: boolean) => void;
   activate: (isActivate: boolean) => void;
   isWordsValidated: boolean;
+}
+
+export interface ICheckButtonProps {
+  wordCheck: () => void;
+  isDisabled: boolean;
+  title: string;
+  color: string;
 }
 
 export interface IFilterButtonProps {

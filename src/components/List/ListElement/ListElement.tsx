@@ -5,16 +5,18 @@ import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
 import {
   changeItemFromLocalStorageById,
-  removeItemFromLocalStorageById,
+  // removeItemFromLocalStorageById,
 } from "../../../utils/localStorage";
 import { useState } from "react";
 import scaleItemColor from "../../../utils/scaleItemColor";
+import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 
 const ListElement: React.FC<IListElementProps> = ({
   element: { id, original, learning, isActive, scale },
 }) => {
   const [isDelete, setIsDelete] = useState(false);
   const [isActiveState, setIsActiveState] = useState<boolean>(isActive);
+  const [isShown, setIsShown] = useState<boolean>(false);
 
   const label = {
     id: "checkbox",
@@ -52,12 +54,14 @@ const ListElement: React.FC<IListElementProps> = ({
         <button type="button" className={classes.button}>
           <FaEdit size={"1.5em"} color={"black"} />
         </button>
+        <DeleteButton isShown={isShown} setIsShown={setIsShown} />
         <button
           type="button"
           className={classes.button}
           onClick={() => {
-            setIsDelete(true);
-            removeItemFromLocalStorageById("data", id);
+            setIsDelete(false);
+            setIsShown(!isShown);
+            // removeItemFromLocalStorageById("data", id);
           }}
         >
           <MdDelete size={"2em"} color={"black"} />

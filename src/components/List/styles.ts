@@ -17,6 +17,7 @@ const useStyles = makeStyles(() =>
       flexDirection: "column",
       margin: "0 0.5em 0",
       overflow: "scroll",
+      overflowX: "hidden",
     },
     emptyArray: {
       height: "3em",

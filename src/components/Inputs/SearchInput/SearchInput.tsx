@@ -15,7 +15,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
         value={searchedWord}
         onChange={(event) => setSearchedWord(event.target.value)}
       />
-      <span className={classes.iconWrapper}>
+      <span className={classes.iconIcon}>
         <FaSearch size={"1.6em"} color="black" />
       </span>
     </div>
