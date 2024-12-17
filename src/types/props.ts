@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { IFinalObject, IObject } from "./data";
 
-//COMPONENTS
+// COMPONENTS
 
 export interface IHeaderProps {
   setMainView: (mainView: string) => void;
@@ -10,10 +10,6 @@ export interface IHeaderProps {
 
 export interface IAddProps {
   test: string;
-}
-
-export interface IListElementProps {
-  element: IFinalObject;
 }
 
 export interface IFiltersProps {
@@ -33,7 +29,26 @@ export interface ITranslateProps {
   test: string;
 }
 
-//INPUTS
+// ELEMENTS
+
+export interface IListElementProps {
+  element: IFinalObject;
+}
+
+export interface IEditElementProps {
+  element: IFinalObject;
+  isEdited: boolean;
+  isWordsValidated: boolean;
+  setIsWordsValidated: (isWordsValidated: boolean) => void;
+  originalWord: string;
+  learningWord: string;
+  descriptionText: string | undefined;
+  setOriginalWord: (originalWord: string) => void;
+  setLearningWord: (learningWord: string) => void;
+  setDescriptionText: (descriptionText: string | undefined) => void;
+}
+
+// INPUTS
 
 export interface ISearchInputProps {
   searchedWord: string;
@@ -54,11 +69,24 @@ export interface IAddInputProps {
   icon?: ReactNode;
 }
 
-//BUTTONS
+// BUTTONS
+
+export interface IEditButtonProps {
+  isEdited: boolean;
+  isShownDelete: boolean;
+  setIsEdited: (isEdited: boolean) => void;
+  isWordsValidated: boolean;
+  originalWord: string;
+  learningWord: string;
+  descriptionText: string | undefined;
+  element: IFinalObject;
+}
 
 export interface IDeleteButtonProps {
-  isShown: boolean;
-  setIsShown: (isShown: boolean) => void;
+  isShownDelete: boolean;
+  setIsShownDelete: (isShownDelete: boolean) => void;
+  setIsDelete: (isDelete: boolean) => void;
+  id: string;
 }
 
 export interface ISpinnerButtonProps {

@@ -1,22 +1,25 @@
 import { IListElementProps } from "../../../types/props";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
-import {
-  changeItemFromLocalStorageById,
-  // removeItemFromLocalStorageById,
-} from "../../../utils/localStorage";
+import { changeItemFromLocalStorageById } from "../../../utils/localStorage";
 import { useState } from "react";
 import scaleItemColor from "../../../utils/scaleItemColor";
 import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
+import EditElement from "../EditElement/EditElement";
+import EditButton from "../../Buttons/EditButton/EditButton";
 
-const ListElement: React.FC<IListElementProps> = ({
-  element: { id, original, learning, isActive, scale },
-}) => {
+const ListElement: React.FC<IListElementProps> = ({ element }) => {
+  const { id, isActive, scale, original, learning, description } = element;
   const [isDelete, setIsDelete] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
   const [isActiveState, setIsActiveState] = useState<boolean>(isActive);
-  const [isShown, setIsShown] = useState<boolean>(false);
+  const [isShownDelete, setIsShownDelete] = useState<boolean>(false);
+  const [isWordsValidated, setIsWordsValidated] = useState<boolean>(false);
+  const [originalWord, setOriginalWord] = useState<string>(original);
+  const [learningWord, setLearningWord] = useState<string>(learning);
+  const [descriptionText, setDescriptionText] = useState<string | undefined>(
+    description
+  );
 
   const label = {
     id: "checkbox",
@@ -34,38 +37,52 @@ const ListElement: React.FC<IListElementProps> = ({
       style={{
         display: isDelete ? "none" : "flex",
         background: scaleItemColor(scale),
+        height: isEdited ? "7em" : "3em",
       }}
     >
-      <div className={classes.wordsWrapper}>
-        <span>{original}</span>
-        <span>{learning}</span>
-      </div>
+      <EditElement
+        element={element}
+        isEdited={isEdited}
+        isWordsValidated={isWordsValidated}
+        setIsWordsValidated={setIsWordsValidated}
+        originalWord={originalWord}
+        learningWord={learningWord}
+        descriptionText={descriptionText}
+        setOriginalWord={setOriginalWord}
+        setLearningWord={setLearningWord}
+        setDescriptionText={setDescriptionText}
+      />
       <div className={classes.buttonsWrapper}>
-        <Checkbox
-          {...label}
-          sx={{
-            "& .MuiSvgIcon-root": {
-              fontSize: "2em",
-              color: "black",
-              margin: -1.3,
-            },
-          }}
-        />
-        <button type="button" className={classes.button}>
-          <FaEdit size={"1.5em"} color={"black"} />
-        </button>
-        <DeleteButton isShown={isShown} setIsShown={setIsShown} />
-        <button
-          type="button"
-          className={classes.button}
-          onClick={() => {
-            setIsDelete(false);
-            setIsShown(!isShown);
-            // removeItemFromLocalStorageById("data", id);
-          }}
-        >
-          <MdDelete size={"2em"} color={"black"} />
-        </button>
+        {!isEdited && (
+          <Checkbox
+            {...label}
+            sx={{
+              "& .MuiSvgIcon-root": {
+                fontSize: "2em",
+                color: "black",
+                margin: -1.3,
+              },
+            }}
+          />
+        )}
+        <div className={classes.buttonsBox}>
+          <EditButton
+            originalWord={originalWord}
+            learningWord={learningWord}
+            descriptionText={descriptionText}
+            isEdited={isEdited}
+            isShownDelete={isShownDelete}
+            setIsEdited={setIsEdited}
+            isWordsValidated={isWordsValidated}
+            element={element}
+          />
+          <DeleteButton
+            isShownDelete={isShownDelete}
+            setIsShownDelete={setIsShownDelete}
+            setIsDelete={setIsDelete}
+            id={id}
+          />
+        </div>
       </div>
     </div>
   );

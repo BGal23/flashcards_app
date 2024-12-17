@@ -36,12 +36,12 @@ const useStyles = makeStyles(() =>
     },
     errorWrapper: {
       position: "relative",
-      bottom: "1em",
-      height: "1em",
-      marginBottom: "-1.2em",
+      bottom: "2em",
+      left: "13em",
+      width: "calc(100% - 13em)",
+      marginBottom: "-1.9em",
       display: "flex",
       justifyContent: "end",
-      top: "-2em",
     },
     error: {
       height: "100%",

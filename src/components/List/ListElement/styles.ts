@@ -1,5 +1,4 @@
 import { createStyles, makeStyles } from "@mui/styles";
-import color from "../../../assets/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -7,16 +6,11 @@ const useStyles = makeStyles(() =>
       height: "3em",
       display: "flex",
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "start",
       borderBottom: "1px solid black",
       padding: "0.5em 1em 0 1em ",
       justifyContent: "space-between",
-    },
-    wordsWrapper: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "0.3em",
-      paddingBottom: "0.5em",
+      transition: "height 500ms ease",
     },
     description: {
       paddingBottom: "0.5em",
@@ -26,22 +20,19 @@ const useStyles = makeStyles(() =>
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      gap: "8px",
+      gap: 8,
       paddingBottom: "0.5em",
-      overflow: "hidden",
-      height: "36px",
+      height: 36,
     },
-    button: {
-      width: "36px",
-      height: "36px",
-      border: "none",
-      borderRadius: "18px",
-      background: color.fontGrey,
+    buttonsBox: {
       display: "flex",
-      justifyContent: "center",
+      flexDirection: "row",
       alignItems: "center",
-      padding: 0,
-      zIndex: 0,
+      justifyContent: "space-between",
+      gap: 8,
+      overflow: "hidden",
+      borderRadius: 18,
+      height: 36,
     },
   })
 );

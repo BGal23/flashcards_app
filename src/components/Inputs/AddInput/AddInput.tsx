@@ -34,9 +34,11 @@ const AddInput: React.FC<IAddInputProps> = ({
           />
         </span>
       )}
-      <div className={classes.errorWrapper}>
-        {error && <span className={classes.error}>{error}</span>}
-      </div>
+      {error && (
+        <div className={classes.errorWrapper}>
+          <span className={classes.error}>{error}</span>
+        </div>
+      )}
     </div>
   );
 };

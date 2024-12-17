@@ -13,3 +13,9 @@ export interface IFinalObject {
   isActive: boolean;
   scale: number;
 }
+
+export interface IUpdateObject {
+  originalWord: string;
+  learningWord: string;
+  descriptionText?: string;
+}
