@@ -8,6 +8,7 @@ import CheckInput from "../Inputs/CheckInput/CheckInput";
 import SpinnerButton from "../Buttons/SpinnerButton/SpinnerButton";
 import color from "../../assets/colors";
 import CheckButton from "../Buttons/CheckButton/CheckButton";
+import levenshteinDistance from "../../utils/levenshteinDistance";
 
 const Learn: React.FC<ILearnProps> = () => {
   const [word, setWord] = useState<IFinalObject>();
@@ -26,7 +27,6 @@ const Learn: React.FC<ILearnProps> = () => {
       setWord(JSON.parse(storageWord));
     } else if (newWord !== null) {
       localStorage.setItem(key, JSON.stringify(newWord));
-
       setWord(newWord);
       setIsArrayEmpty(false);
     } else {
@@ -46,10 +46,17 @@ const Learn: React.FC<ILearnProps> = () => {
       setIsShowInfo(true);
       if (
         word.learning.toLocaleLowerCase() ===
-        yourTranslation.toLocaleLowerCase()
+        yourTranslation.toLocaleLowerCase().trimEnd()
       ) {
         addPoint(word.id, true);
         setColorAnswer(color.headerButton);
+      } else if (
+        levenshteinDistance(
+          word.learning.toLocaleLowerCase(),
+          yourTranslation.toLocaleLowerCase().trimEnd()
+        ) === 1
+      ) {
+        setColorAnswer(color.activateButton);
       } else {
         addPoint(word.id, false);
         setColorAnswer(color.error);
@@ -106,6 +113,7 @@ const Learn: React.FC<ILearnProps> = () => {
               color={color.headerButton}
             />
           </div>
+          <div className={classes.description}>{word?.description}</div>
         </>
       )}
     </div>

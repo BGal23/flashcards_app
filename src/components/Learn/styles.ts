@@ -17,6 +17,11 @@ const useStyles = makeStyles(() =>
       display: "flex",
       justifyContent: "space-between",
     },
+    description: {
+      margin: "0 1em 0",
+      textAlign: "center",
+      fontStyle: "italic",
+    },
   })
 );
 

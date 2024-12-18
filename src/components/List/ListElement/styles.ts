@@ -11,6 +11,7 @@ const useStyles = makeStyles(() =>
       padding: "0.5em 1em 0 1em ",
       justifyContent: "space-between",
       transition: "height 500ms ease",
+      overflow: "hidden",
     },
     description: {
       paddingBottom: "0.5em",

@@ -41,8 +41,8 @@ const Add: React.FC<IAddProps> = () => {
   };
 
   const dataObject = {
-    originalWord: originalWord,
-    learningWord: learningWord,
+    originalWord: originalWord.trimEnd(),
+    learningWord: learningWord.trimEnd(),
     description: description,
     scale: scale,
   };

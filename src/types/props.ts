@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IFinalObject, IObject } from "./data";
+import { IFinalObject, IObject, IUpdateObject } from "./data";
 
 // COMPONENTS
 
@@ -80,6 +80,7 @@ export interface IEditButtonProps {
   learningWord: string;
   descriptionText: string | undefined;
   element: IFinalObject;
+  updateData: (element: IUpdateObject) => void;
 }
 
 export interface IDeleteButtonProps {

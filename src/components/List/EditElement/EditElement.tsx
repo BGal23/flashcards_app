@@ -5,7 +5,6 @@ import validateWord from "../../../utils/validateWord";
 import color from "../../../assets/colors";
 
 const EditElement: React.FC<IEditElementProps> = ({
-  element: { original, learning, description },
   isEdited,
   setIsWordsValidated,
   originalWord,
@@ -16,20 +15,6 @@ const EditElement: React.FC<IEditElementProps> = ({
   setDescriptionText,
 }) => {
   const classes = useStyles();
-
-  useEffect(() => {
-    setOriginalWord(original);
-    setLearningWord(learning);
-    setDescriptionText(description);
-  }, [
-    description,
-    isEdited,
-    learning,
-    original,
-    setDescriptionText,
-    setLearningWord,
-    setOriginalWord,
-  ]);
 
   useEffect(() => {
     if (
@@ -83,8 +68,8 @@ const EditElement: React.FC<IEditElementProps> = ({
         </>
       ) : (
         <>
-          <span className={classes.text}>{original}</span>
-          <span className={classes.text}>{learning}</span>
+          <span className={classes.text}>{originalWord}</span>
+          <span className={classes.text}>{learningWord}</span>
         </>
       )}
     </div>

@@ -2,11 +2,12 @@ import { IListElementProps } from "../../../types/props";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
 import { changeItemFromLocalStorageById } from "../../../utils/localStorage";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import scaleItemColor from "../../../utils/scaleItemColor";
 import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 import EditElement from "../EditElement/EditElement";
 import EditButton from "../../Buttons/EditButton/EditButton";
+import { IUpdateObject } from "../../../types/data";
 
 const ListElement: React.FC<IListElementProps> = ({ element }) => {
   const { id, isActive, scale, original, learning, description } = element;
@@ -20,6 +21,13 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
   const [descriptionText, setDescriptionText] = useState<string | undefined>(
     description
   );
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const updateData = async (newElement: IUpdateObject) => {
+    setOriginalWord(newElement.originalWord);
+    setLearningWord(newElement.learningWord);
+    setDescriptionText(newElement.descriptionText);
+  };
 
   const label = {
     id: "checkbox",
@@ -33,6 +41,7 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
   const classes = useStyles();
   return (
     <div
+      ref={containerRef}
       className={classes.container}
       style={{
         display: isDelete ? "none" : "flex",
@@ -41,7 +50,6 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
       }}
     >
       <EditElement
-        element={element}
         isEdited={isEdited}
         isWordsValidated={isWordsValidated}
         setIsWordsValidated={setIsWordsValidated}
@@ -51,6 +59,7 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
         setOriginalWord={setOriginalWord}
         setLearningWord={setLearningWord}
         setDescriptionText={setDescriptionText}
+        element={element}
       />
       <div className={classes.buttonsWrapper}>
         {!isEdited && (
@@ -75,6 +84,8 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
             setIsEdited={setIsEdited}
             isWordsValidated={isWordsValidated}
             element={element}
+            updateData={updateData}
+            ref={containerRef}
           />
           <DeleteButton
             isShownDelete={isShownDelete}
