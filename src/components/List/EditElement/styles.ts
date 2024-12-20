@@ -20,9 +20,12 @@ const useStyles = makeStyles(() =>
     text: {
       fontSize: "1em",
       height: "calc(1em + 1px)",
+      textWrap: "nowrap",
+      textOverflow: "ellipsis",
+      overflow: "hidden",
     },
     textarea: {
-      // width: "calc(100% - 2em)",
+      height: 50,
     },
   })
 );
