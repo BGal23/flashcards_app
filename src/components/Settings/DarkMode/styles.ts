@@ -2,8 +2,10 @@ import { createStyles, makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    container: {
-      margin: "2em",
+    box: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
   })
 );

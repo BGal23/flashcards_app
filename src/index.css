@@ -14,3 +14,9 @@ input {
   font-size: large;
   font-family: "Lucida Grande", Verdana, sans-serif;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

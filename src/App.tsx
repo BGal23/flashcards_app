@@ -6,9 +6,17 @@ import Translate from "./components/Translate/Translate";
 import Add from "./components/Add/Add";
 import useSaveScreen from "./hooks/useSaveScreen";
 import { useEffect } from "react";
+import { getFromLocalStorage } from "./utils/localStorage";
 
 const App = () => {
   const [mainView, setMainView] = useSaveScreen("screen", "learn");
+
+  useEffect(() => {
+    const currentMode: boolean | null = getFromLocalStorage("darkMode");
+    if (currentMode === null) {
+      localStorage.setItem("darkMode", JSON.stringify(false));
+    }
+  }, []);
 
   useEffect(() => {
     setMainView(mainView);
