@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
 import { getFromLocalStorage } from "../../../utils/localStorage";
+import color from "../../../assets/colors";
 
 const DarkMode = () => {
   const classes = useStyles();
@@ -12,9 +13,15 @@ const DarkMode = () => {
     if (typeof currentMode === "boolean") {
       setIsDarkModeOn(currentMode);
     }
-  }, []);
+    if (isDarkModeOn) {
+      document.body.classList.add("darkMode");
+    } else {
+      document.body.classList.remove("darkMode");
+    }
+  }, [isDarkModeOn]);
 
   const handleClick = () => {
+    document.body.classList.remove("darkMode");
     localStorage.setItem("darkMode", JSON.stringify(!isDarkModeOn));
     setIsDarkModeOn(!isDarkModeOn);
   };
@@ -29,7 +36,7 @@ const DarkMode = () => {
         sx={{
           "& .MuiSvgIcon-root": {
             fontSize: "2em",
-            color: "black",
+            color: color.fontBlack,
             margin: -1.3,
           },
         }}

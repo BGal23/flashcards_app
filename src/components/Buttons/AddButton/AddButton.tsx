@@ -56,7 +56,7 @@ const AddButton: React.FC<IAddButtonProps> = ({
         className={classes.button}
         onClick={() => sendData()}
       >
-        Add word <FaPlusCircle size={"2em"} color="black" />
+        Add word <FaPlusCircle size={"2em"} color={color.fontBlack} />
       </button>
     </div>
   );

@@ -7,6 +7,7 @@ import {
   FaSortAmountDownAlt,
 } from "react-icons/fa";
 import useStyles from "./styles";
+import color from "../../assets/colors";
 
 const Filters: React.FC<IFiltersProps> = ({ usedFilter, setUsedFilter }) => {
   const classes = useStyles();
@@ -17,25 +18,25 @@ const Filters: React.FC<IFiltersProps> = ({ usedFilter, setUsedFilter }) => {
         usedFilter={usedFilter}
         setUsedFilter={setUsedFilter}
         activate={"a>z"}
-        icon={<FaSortAlphaDown size={"2.5em"} color="black" />}
+        icon={<FaSortAlphaDown size={"2.5em"} color={color.fontBlack} />}
       />
       <FilterButton
         usedFilter={usedFilter}
         setUsedFilter={setUsedFilter}
         activate={"z>a"}
-        icon={<FaSortAlphaDownAlt size={"2.5em"} color="black" />}
+        icon={<FaSortAlphaDownAlt size={"2.5em"} color={color.fontBlack} />}
       />
       <FilterButton
         usedFilter={usedFilter}
         setUsedFilter={setUsedFilter}
         activate={"+>-"}
-        icon={<FaSortAmountDown size={"2.5em"} color="black" />}
+        icon={<FaSortAmountDown size={"2.5em"} color={color.fontBlack} />}
       />
       <FilterButton
         usedFilter={usedFilter}
         setUsedFilter={setUsedFilter}
         activate={"->+"}
-        icon={<FaSortAmountDownAlt size={"2.5em"} color="black" />}
+        icon={<FaSortAmountDownAlt size={"2.5em"} color={color.fontBlack} />}
       />
     </div>
   );

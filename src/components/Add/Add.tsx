@@ -55,7 +55,7 @@ const Add: React.FC<IAddProps> = () => {
         value={originalWord}
         changeValue={setOriginalWord}
         error={(isAddButtonActive && validateWord(originalWord)) || ""}
-        icon={<TbAlphabetLatin size={"3em"} color={"black"} />}
+        icon={<TbAlphabetLatin size={"3em"} color={color.fontBlack} />}
       />
       <AddInput
         placeholder={"Translate..."}
@@ -63,7 +63,7 @@ const Add: React.FC<IAddProps> = () => {
         value={learningWord}
         changeValue={setLearningWord}
         error={(isAddButtonActive && validateWord(learningWord)) || ""}
-        icon={<TbAlphabetGreek size={"3em"} color={"black"} />}
+        icon={<TbAlphabetGreek size={"3em"} color={color.fontBlack} />}
       />
       <AddInput
         placeholder={"Description (optional)"}
@@ -72,7 +72,7 @@ const Add: React.FC<IAddProps> = () => {
         changeValue={setDescription}
       />
       <div className={classes.slider}>
-        <FaThumbsDown size={"2em"} color={"red"} />
+        <FaThumbsDown size={"2em"} color={color.error} />
         <Slider
           value={scale}
           defaultValue={0}

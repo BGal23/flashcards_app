@@ -1,6 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 import useStyles from "./styles";
 import { ISearchInputProps } from "../../../types/props";
+import color from "../../../assets/colors";
 
 const SearchInput: React.FC<ISearchInputProps> = ({
   searchedWord,
@@ -16,7 +17,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
         onChange={(event) => setSearchedWord(event.target.value)}
       />
       <span className={classes.iconIcon}>
-        <FaSearch size={"1.6em"} color="black" />
+        <FaSearch size={"1.6em"} color={color.fontBlack} />
       </span>
     </div>
   );

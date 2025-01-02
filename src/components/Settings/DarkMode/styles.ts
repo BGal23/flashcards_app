@@ -1,4 +1,5 @@
 import { createStyles, makeStyles } from "@mui/styles";
+import color from "../../../assets/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -6,6 +7,7 @@ const useStyles = makeStyles(() =>
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
+      color: color.fontBlack,
     },
   })
 );

@@ -1,4 +1,5 @@
 import { createStyles, makeStyles } from "@mui/styles";
+import color from "../../assets/colors";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -12,6 +13,7 @@ const useStyles = makeStyles(() =>
       textAlign: "center",
       fontSize: "2em",
       marginBottom: "0.5em",
+      color: color.fontBlack,
     },
     buttonsWrapper: {
       display: "flex",
@@ -21,6 +23,7 @@ const useStyles = makeStyles(() =>
       margin: "0 1em 0",
       textAlign: "center",
       fontStyle: "italic",
+      color: color.fontBlack,
     },
   })
 );

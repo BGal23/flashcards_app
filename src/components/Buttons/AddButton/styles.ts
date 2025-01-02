@@ -4,7 +4,6 @@ import color from "../../../assets/colors";
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
-      color: "black",
       border: "none",
       padding: "0.3em 0.4em 0.3em 0.8em",
       background: color.headerButton,
@@ -15,6 +14,7 @@ const useStyles = makeStyles(() =>
       gap: "0.5em",
       fontSize: "1em",
       marginRight: "1em",
+      color: color.fontBlack,
     },
     buttonWrapper: {
       display: "flex",
