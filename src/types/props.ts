@@ -22,11 +22,17 @@ export interface ILearnProps {
 }
 
 export interface ISettingsProps {
-  test: string;
+  isDarkModeOn: boolean;
+  setIsDarkModeOn: (isDarkModeOn: boolean) => void;
 }
 
 export interface ITranslateProps {
   test: string;
+}
+
+export interface IDarkModeProps {
+  isDarkModeOn: boolean;
+  setIsDarkModeOn: (isDarkModeOn: boolean) => void;
 }
 
 // ELEMENTS

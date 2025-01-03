@@ -11,6 +11,7 @@ const useStyles = makeStyles(() =>
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
       borderRadius: "1.5em",
       fontSize: "1.5em",
+      color: color.fontBlack,
     },
   })
 );

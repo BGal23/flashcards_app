@@ -15,7 +15,7 @@ const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
 
   return (
     <div className={classes.container}>
-      <div className={classes.loaderRing} style={{ background: `${color}bb` }}>
+      <div className={classes.loaderRing} style={{ background: `${color}` }}>
         <span
           className={classes.shadow}
           style={{

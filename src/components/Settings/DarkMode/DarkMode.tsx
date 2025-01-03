@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
 import { getFromLocalStorage } from "../../../utils/localStorage";
 import color from "../../../assets/colors";
+import { IDarkModeProps } from "../../../types/props";
 
-const DarkMode = () => {
+const DarkMode: React.FC<IDarkModeProps> = ({
+  isDarkModeOn,
+  setIsDarkModeOn,
+}) => {
   const classes = useStyles();
-  const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
 
   useEffect(() => {
     const currentMode: boolean | null = getFromLocalStorage("darkMode");
