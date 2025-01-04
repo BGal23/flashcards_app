@@ -11,16 +11,19 @@ const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
 
   useEffect(() => {
     setIsLoading(true);
+
+    console.log(`${color}dd`);
   }, [color]);
 
   return (
     <div className={classes.container}>
-      <div className={classes.loaderRing} style={{ background: `${color}` }}>
+      <div className={classes.loaderRing} style={{ background: color }}>
         <span
           className={classes.shadow}
           style={{
             transform: isLoading ? "translatex(100px)" : "translatex(0)",
-            background: color,
+            background: "black",
+            opacity: 0.3,
           }}
         ></span>
         <button

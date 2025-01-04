@@ -34,6 +34,7 @@ const useStyles = makeStyles(() =>
       position: "absolute",
       backgroundColor: "transparent",
       fontSize: "2em",
+      color: color.fontBlack,
     },
   })
 );

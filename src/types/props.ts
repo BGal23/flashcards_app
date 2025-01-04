@@ -42,7 +42,6 @@ export interface IListElementProps {
 }
 
 export interface IEditElementProps {
-  element: IFinalObject;
   isEdited: boolean;
   isWordsValidated: boolean;
   setIsWordsValidated: (isWordsValidated: boolean) => void;
@@ -52,6 +51,7 @@ export interface IEditElementProps {
   setOriginalWord: (originalWord: string) => void;
   setLearningWord: (learningWord: string) => void;
   setDescriptionText: (descriptionText: string | undefined) => void;
+  isActive: boolean;
 }
 
 // INPUTS

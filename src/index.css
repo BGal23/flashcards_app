@@ -1,5 +1,5 @@
 :root {
-  --background: blanchedalmond;
+  --background: rgb(254, 241, 222);
   --header: #8ee000;
   --headerButton: #7ac70c;
   --activateButton: #ffc715;
@@ -14,18 +14,16 @@
 
 .darkMode {
   --background: #232323;
-  --header: #8ee00044;
-  --headerButton: #7ac70c44;
-  /* --header: blue;
-  --headerButton: darkblue; */
-  --activateButton: #ffc71544;
+  --header: #588805;
+  --headerButton: #416a07;
+  --activateButton: #b39b17;
   --edit: #1e88e5;
   --shadow: #111;
-  --error: #e53838bb;
+  --error: #a52a2a;
   --fontBlack: #fff;
   --fontWhite: #fbfbf1;
   --fontGrey: #a1a1a1;
-  --input: #161616;
+  --input: #1b1b1b;
 }
 
 body {

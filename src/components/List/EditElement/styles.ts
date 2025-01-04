@@ -6,7 +6,7 @@ const useStyles = makeStyles(() =>
       display: "flex",
       flexDirection: "column",
       gap: "0.3em",
-      paddingBottom: "0.5em",
+      marginBottom: "0.5em",
       overflow: "hidden",
     },
     input: {
@@ -19,7 +19,6 @@ const useStyles = makeStyles(() =>
     },
     text: {
       fontSize: "1em",
-      height: "calc(1em + 1px)",
       textWrap: "nowrap",
       textOverflow: "ellipsis",
       overflow: "hidden",

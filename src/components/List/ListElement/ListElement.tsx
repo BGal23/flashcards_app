@@ -59,7 +59,7 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
         setOriginalWord={setOriginalWord}
         setLearningWord={setLearningWord}
         setDescriptionText={setDescriptionText}
-        element={element}
+        isActive={isActiveState}
       />
       <div className={classes.buttonsWrapper}>
         {!isEdited && (

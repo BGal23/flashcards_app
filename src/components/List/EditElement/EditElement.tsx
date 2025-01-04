@@ -13,6 +13,7 @@ const EditElement: React.FC<IEditElementProps> = ({
   setOriginalWord,
   setLearningWord,
   setDescriptionText,
+  isActive,
 }) => {
   const classes = useStyles();
 
@@ -68,8 +69,17 @@ const EditElement: React.FC<IEditElementProps> = ({
         </>
       ) : (
         <>
-          <span className={classes.text}>{originalWord}</span>
-          <span className={classes.text}>{learningWord}</span>
+          {[originalWord, learningWord].map(
+            (element: string, index: number) => (
+              <span
+                key={index}
+                className={classes.text}
+                style={{ textDecoration: isActive ? "none" : "line-through" }}
+              >
+                {element}
+              </span>
+            )
+          )}
         </>
       )}
     </div>
