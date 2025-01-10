@@ -23,7 +23,7 @@
   --fontBlack: #fff;
   --fontWhite: #fbfbf1;
   --fontGrey: #a1a1a1;
-  --input: #1b1b1b;
+  --input: #424242;
 }
 
 body {
@@ -36,6 +36,7 @@ button {
   padding: 0;
   color: black;
   font-family: "Lucida Grande", Verdana, sans-serif;
+  cursor: pointer;
 }
 
 input {

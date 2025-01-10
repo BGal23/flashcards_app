@@ -11,36 +11,38 @@ const Header: React.FC<IHeaderProps> = ({ setMainView, mainView }) => {
 
   return (
     <div className={classes.container}>
-      <HeaderButton
-        setMainView={setMainView}
-        mainView={mainView}
-        activate={"learn"}
-        icon={<FaBook size={"2.5em"} color={color.fontBlack} />}
-      />
-      <HeaderButton
-        setMainView={setMainView}
-        mainView={mainView}
-        activate={"add"}
-        icon={<FaPlusCircle size={"2.5em"} color={color.fontBlack} />}
-      />
-      <HeaderButton
-        setMainView={setMainView}
-        mainView={mainView}
-        activate={"list"}
-        icon={<FaClipboardList size={"2.5em"} color={color.fontBlack} />}
-      />
-      <HeaderButton
-        setMainView={setMainView}
-        mainView={mainView}
-        activate={"translate"}
-        icon={<MdGTranslate size={"2.5em"} color={color.fontBlack} />}
-      />
-      <HeaderButton
-        setMainView={setMainView}
-        mainView={mainView}
-        activate={"settings"}
-        icon={<FaGear size={"2.5em"} color={color.fontBlack} />}
-      />
+      <div className={classes.iconsWrapper}>
+        <HeaderButton
+          setMainView={setMainView}
+          mainView={mainView}
+          activate={"learn"}
+          icon={<FaBook size={"2.5em"} color={color.fontBlack} />}
+        />
+        <HeaderButton
+          setMainView={setMainView}
+          mainView={mainView}
+          activate={"add"}
+          icon={<FaPlusCircle size={"2.5em"} color={color.fontBlack} />}
+        />
+        <HeaderButton
+          setMainView={setMainView}
+          mainView={mainView}
+          activate={"list"}
+          icon={<FaClipboardList size={"2.5em"} color={color.fontBlack} />}
+        />
+        <HeaderButton
+          setMainView={setMainView}
+          mainView={mainView}
+          activate={"translate"}
+          icon={<MdGTranslate size={"2.5em"} color={color.fontBlack} />}
+        />
+        <HeaderButton
+          setMainView={setMainView}
+          mainView={mainView}
+          activate={"settings"}
+          icon={<FaGear size={"2.5em"} color={color.fontBlack} />}
+        />
+      </div>
     </div>
   );
 };

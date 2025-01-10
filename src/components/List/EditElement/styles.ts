@@ -25,6 +25,10 @@ const useStyles = makeStyles(() =>
     },
     textarea: {
       height: 50,
+      resize: "none",
+      border: "none",
+      padding: "0.3em",
+      borderRadius: 5,
     },
   })
 );

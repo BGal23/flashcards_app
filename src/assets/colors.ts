@@ -8,6 +8,7 @@ const color = {
   fontBlack: `var(--fontBlack)`,
   fontWhite: `var(--fontWhite)`,
   fontGrey: `var(--fontGrey)`,
+  input: `var(--input)`,
 };
 
 export default color;

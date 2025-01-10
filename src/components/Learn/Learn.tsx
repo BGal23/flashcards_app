@@ -88,7 +88,7 @@ const Learn: React.FC<ILearnProps> = () => {
     <div className={classes.container}>
       <div className={classes.mainWord}>
         {isArrayEmpty
-          ? "Sorry :("
+          ? "Add new word"
           : isShowInfo
           ? word?.learning
           : word?.original}

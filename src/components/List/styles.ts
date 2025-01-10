@@ -9,15 +9,22 @@ const useStyles = makeStyles(() =>
     listWrapper: {
       width: "calc(100% - 1em)",
       height: "calc(100vh - 14.5em)",
-      background: color.fontWhite,
+      background: color.input,
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
       borderRadius: "1em",
       display: "flex",
       flexDirection: "column",
       margin: "0 0.5em 0",
-      overflow: "scroll",
+      maxHeight: "800px",
       overflowX: "hidden",
+      overflowY: "scroll",
+      scrollbarWidth: "none",
+      "-ms-overflow-style": "none",
+
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
     },
     emptyArray: {
       height: "3em",
@@ -25,6 +32,7 @@ const useStyles = makeStyles(() =>
       justifyContent: "center",
       alignItems: "center",
       gap: "1em",
+      color: color.fontBlack,
     },
   })
 );

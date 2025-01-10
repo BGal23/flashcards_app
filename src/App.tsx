@@ -5,14 +5,16 @@ import List from "./components/List/List";
 import Translate from "./components/Translate/Translate";
 import Add from "./components/Add/Add";
 import useSaveScreen from "./hooks/useSaveScreen";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { getFromLocalStorage } from "./utils/localStorage";
+import useStyles from "./styles";
 
 const App = () => {
   const [mainView, setMainView] = useSaveScreen("screen", "learn");
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
+  const classes = useStyles();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentMode: boolean | null = getFromLocalStorage("darkMode");
     if (typeof currentMode === "boolean") {
       setIsDarkModeOn(currentMode);
@@ -62,7 +64,11 @@ const App = () => {
   return (
     <>
       <Header setMainView={setMainView} mainView={mainView} />
-      {changeMainView(mainView)}
+      <div className={classes.container}>
+        <div className={classes.elementsWrapper}>
+          {changeMainView(mainView)}
+        </div>
+      </div>
     </>
   );
 };

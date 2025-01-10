@@ -33,6 +33,7 @@ const useStyles = makeStyles(() =>
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
       fontSize: "medium",
+      resize: "none",
     },
     errorWrapper: {
       position: "relative",
