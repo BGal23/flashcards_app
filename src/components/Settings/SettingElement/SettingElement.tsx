@@ -3,39 +3,43 @@ import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
 import { getFromLocalStorage } from "../../../utils/localStorage";
 import color from "../../../assets/colors";
-import { IDarkModeProps } from "../../../types/props";
+import { ISettingElementProps } from "../../../types/props";
 
-const DarkMode: React.FC<IDarkModeProps> = ({
-  isDarkModeOn,
-  setIsDarkModeOn,
+const SettingElement: React.FC<ISettingElementProps> = ({
+  title,
+  memoryKey,
+  isTurnOn,
+  setIsTurnOn,
 }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    const currentMode: boolean | null = getFromLocalStorage("darkMode");
+    const currentMode: boolean | null = getFromLocalStorage(memoryKey);
     if (typeof currentMode === "boolean") {
-      setIsDarkModeOn(currentMode);
+      setIsTurnOn(currentMode);
     }
-    if (isDarkModeOn) {
-      document.body.classList.add("darkMode");
+    if (isTurnOn) {
+      document.body.classList.add(memoryKey);
     } else {
-      document.body.classList.remove("darkMode");
+      document.body.classList.remove(memoryKey);
     }
-  }, [isDarkModeOn]);
+  }, [isTurnOn, memoryKey, setIsTurnOn]);
 
   const handleClick = () => {
-    document.body.classList.remove("darkMode");
-    localStorage.setItem("darkMode", JSON.stringify(!isDarkModeOn));
-    setIsDarkModeOn(!isDarkModeOn);
+    console.log(memoryKey);
+
+    document.body.classList.remove(memoryKey);
+    localStorage.setItem(memoryKey, JSON.stringify(!isTurnOn));
+    setIsTurnOn(!isTurnOn);
   };
 
   return (
     <div className={classes.box}>
-      <h4>Dark Mode</h4>
+      <h4>{title}</h4>
       <Checkbox
         id="checkbox"
         onChange={handleClick}
-        checked={isDarkModeOn}
+        checked={isTurnOn}
         sx={{
           "& .MuiSvgIcon-root": {
             fontSize: "2em",
@@ -48,4 +52,4 @@ const DarkMode: React.FC<IDarkModeProps> = ({
   );
 };
 
-export default DarkMode;
+export default SettingElement;

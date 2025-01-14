@@ -24,9 +24,9 @@ const useStyles = makeStyles(() =>
       overflow: "hidden",
     },
     textarea: {
-      height: 50,
+      height: 40,
       resize: "none",
-      border: "none",
+      border: "1px solid black",
       padding: "0.3em",
       borderRadius: 5,
     },

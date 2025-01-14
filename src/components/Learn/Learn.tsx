@@ -10,12 +10,13 @@ import color from "../../assets/colors";
 import CheckButton from "../Buttons/CheckButton/CheckButton";
 import levenshteinDistance from "../../utils/levenshteinDistance";
 
-const Learn: React.FC<ILearnProps> = () => {
+const Learn: React.FC<ILearnProps> = ({ isShowWrongWord, setMainView }) => {
   const [word, setWord] = useState<IFinalObject>();
   const [isArrayEmpty, setIsArrayEmpty] = useState<boolean>(false);
   const [inputPlace, setInputPlace] = useState<string>("");
   const [colorAnswer, setColorAnswer] = useState<string>("");
   const [isShowInfo, setIsShowInfo] = useState<boolean>(false);
+  const [wrongAnswer, setWrongAnswer] = useState<string>("");
   const classes = useStyles();
   const timerID = useRef<number | null>(null);
 
@@ -28,13 +29,17 @@ const Learn: React.FC<ILearnProps> = () => {
     } else if (newWord !== null) {
       localStorage.setItem(key, JSON.stringify(newWord));
       setWord(newWord);
-      setIsArrayEmpty(false);
-    } else {
-      setIsArrayEmpty(true);
     }
   };
 
   useEffect(() => {
+    const total = localStorage.getItem("total");
+    if (Number(total) === 0) {
+      localStorage.removeItem("currentWord");
+      setIsArrayEmpty(true);
+    } else {
+      setIsArrayEmpty(false);
+    }
     fetchWord("currentWord", false);
   }, []);
 
@@ -56,9 +61,11 @@ const Learn: React.FC<ILearnProps> = () => {
           yourTranslation.toLocaleLowerCase().trimEnd()
         ) === 1
       ) {
+        setWrongAnswer(inputPlace);
         setColorAnswer(color.activateButton);
       } else {
         addPoint(word.id, false);
+        setWrongAnswer(inputPlace);
         setColorAnswer(color.error);
       }
 
@@ -66,8 +73,8 @@ const Learn: React.FC<ILearnProps> = () => {
 
       timerID.current = window.setTimeout(() => {
         restartWord();
+        setWrongAnswer("");
       }, 5000);
-
       setInputPlace("");
     } else {
       console.error("Data error");
@@ -86,15 +93,24 @@ const Learn: React.FC<ILearnProps> = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.mainWord}>
-        {isArrayEmpty
-          ? "Add new word"
-          : isShowInfo
-          ? word?.learning
-          : word?.original}
-      </div>
+      {isArrayEmpty ? (
+        <button type="button" onClick={() => setMainView("add")}>
+          Add new word
+        </button>
+      ) : (
+        <div className={classes.mainWord}>
+          {isShowInfo ? word?.learning : word?.original}
+        </div>
+      )}
       {isShowInfo ? (
-        <SpinnerButton restartWord={restartWord} color={colorAnswer} />
+        <>
+          {colorAnswer !== color.headerButton && isShowWrongWord && (
+            <div className={classes.mainWord} style={{ color: colorAnswer }}>
+              {wrongAnswer}
+            </div>
+          )}
+          <SpinnerButton correctWord={restartWord} color={colorAnswer} />
+        </>
       ) : (
         <>
           <CheckInput checkedWord={inputPlace} setCheckedWord={setInputPlace} />

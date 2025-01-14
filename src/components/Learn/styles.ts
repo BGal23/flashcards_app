@@ -25,6 +25,19 @@ const useStyles = makeStyles(() =>
       fontStyle: "italic",
       color: color.fontBlack,
     },
+    addButton: {
+      border: "none",
+      padding: "0.3em 0.4em 0.3em 0.8em",
+      background: color.headerButton,
+      boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      borderRadius: "2em",
+      display: "flex",
+      alignItems: "center",
+      gap: "0.5em",
+      fontSize: "1em",
+      marginRight: "1em",
+      color: color.fontBlack,
+    },
   })
 );
 

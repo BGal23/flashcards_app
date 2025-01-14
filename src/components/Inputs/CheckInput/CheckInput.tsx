@@ -13,6 +13,9 @@ const CheckInput: React.FC<ICheckInputProps> = ({
         className={classes.input}
         value={checkedWord}
         onChange={(event) => setCheckedWord(event.target.value)}
+        autoCorrect="off"
+        spellCheck="false"
+        autoComplete="off"
       />
     </div>
   );

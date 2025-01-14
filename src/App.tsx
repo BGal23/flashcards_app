@@ -12,6 +12,7 @@ import useStyles from "./styles";
 const App = () => {
   const [mainView, setMainView] = useSaveScreen("screen", "learn");
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
+  const [isShowWrongWord, setIsShowWrongWord] = useState<boolean>(false);
   const classes = useStyles();
 
   useLayoutEffect(() => {
@@ -27,20 +28,15 @@ const App = () => {
   }, [isDarkModeOn]);
 
   useEffect(() => {
-    const currentMode: boolean | null = getFromLocalStorage("darkMode");
-    if (currentMode === null) {
-      localStorage.setItem("darkMode", JSON.stringify(false));
-    }
-  }, []);
-
-  useEffect(() => {
     setMainView(mainView);
   });
 
   const changeMainView = (mainView: string) => {
     switch (mainView) {
       case "learn":
-        return <Learn test="temp" />;
+        return (
+          <Learn isShowWrongWord={isShowWrongWord} setMainView={setMainView} />
+        );
 
       case "list":
         return <List />;
@@ -56,6 +52,8 @@ const App = () => {
           <Settings
             isDarkModeOn={isDarkModeOn}
             setIsDarkModeOn={setIsDarkModeOn}
+            isShowWrongWord={isShowWrongWord}
+            setIsShowWrongWord={setIsShowWrongWord}
           />
         );
     }

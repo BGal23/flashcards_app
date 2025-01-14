@@ -24,6 +24,7 @@ export const addToMemory = (object: IObject | undefined) => {
 
       existingData.push(newObject);
       saveToLocalStorage("data", existingData);
+      saveToLocalStorage("total", existingData.length);
     }
     return true;
   } else if (object === undefined) {
@@ -53,6 +54,7 @@ export const removeItemFromLocalStorageById = (key: string, id: string) => {
     const array = JSON.parse(item);
     const updatedArray = array.filter((item: IFinalObject) => item.id !== id);
     localStorage.setItem(key, JSON.stringify(updatedArray));
+    saveToLocalStorage("total", updatedArray.length);
   }
 };
 

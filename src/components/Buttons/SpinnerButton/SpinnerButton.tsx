@@ -3,7 +3,7 @@ import { ISpinnerButtonProps } from "../../../types/props";
 import useStyles from "./styles";
 
 const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
-  restartWord,
+  correctWord,
   color,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,8 +11,6 @@ const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
 
   useEffect(() => {
     setIsLoading(true);
-
-    console.log(`${color}dd`);
   }, [color]);
 
   return (
@@ -29,7 +27,7 @@ const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
         <button
           type="button"
           className={classes.button}
-          onClick={() => restartWord()}
+          onClick={() => correctWord()}
         >
           Next!
         </button>
