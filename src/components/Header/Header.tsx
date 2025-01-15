@@ -37,6 +37,7 @@ const Header: React.FC<IHeaderProps> = ({ setMainView, mainView }) => {
       <div className={classes.iconsWrapper}>
         {buttonsConfig.map(({ activate, icon }) => (
           <HeaderButton
+            key={activate}
             setMainView={setMainView}
             mainView={mainView}
             activate={activate}

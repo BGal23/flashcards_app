@@ -5,6 +5,7 @@ import useStyles from "./styles";
 const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
   correctWord,
   color,
+  time,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const classes = useStyles();
@@ -20,8 +21,7 @@ const SpinnerButton: React.FC<ISpinnerButtonProps> = ({
           className={classes.shadow}
           style={{
             transform: isLoading ? "translatex(100px)" : "translatex(0)",
-            background: "black",
-            opacity: 0.3,
+            transition: `transform ${time}ms linear`,
           }}
         ></span>
         <button

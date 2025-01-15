@@ -9,6 +9,7 @@ const color = {
   fontWhite: `var(--fontWhite)`,
   fontGrey: `var(--fontGrey)`,
   input: `var(--input)`,
+  background: "var(--background)",
 };
 
 export default color;

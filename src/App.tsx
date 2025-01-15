@@ -13,11 +13,12 @@ const App = () => {
   const [mainView, setMainView] = useSaveScreen("screen", "learn");
   const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
   const [isShowWrongWord, setIsShowWrongWord] = useState<boolean>(false);
+  const [timeNextWord, setTimeNextWord] = useState<number>(5000);
   const classes = useStyles();
 
   useLayoutEffect(() => {
     const currentMode: boolean | null = getFromLocalStorage("darkMode");
-    if (typeof currentMode === "boolean") {
+    if (currentMode) {
       setIsDarkModeOn(currentMode);
     }
     if (isDarkModeOn) {
@@ -29,13 +30,23 @@ const App = () => {
 
   useEffect(() => {
     setMainView(mainView);
-  });
+
+    const currentShowSet: boolean | null = getFromLocalStorage("showWrongWord");
+    const currentTimeSet: number | null = getFromLocalStorage("timeNextWord");
+
+    if (currentShowSet) setIsShowWrongWord(currentShowSet);
+    if (currentTimeSet) setTimeNextWord(currentTimeSet);
+  }, [mainView, setMainView]);
 
   const changeMainView = (mainView: string) => {
     switch (mainView) {
       case "learn":
         return (
-          <Learn isShowWrongWord={isShowWrongWord} setMainView={setMainView} />
+          <Learn
+            isShowWrongWord={isShowWrongWord}
+            setMainView={setMainView}
+            timeNextWord={timeNextWord}
+          />
         );
 
       case "list":
@@ -54,6 +65,8 @@ const App = () => {
             setIsDarkModeOn={setIsDarkModeOn}
             isShowWrongWord={isShowWrongWord}
             setIsShowWrongWord={setIsShowWrongWord}
+            timeNextWord={timeNextWord}
+            setTimeNextWord={setTimeNextWord}
           />
         );
     }

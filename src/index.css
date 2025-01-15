@@ -29,6 +29,7 @@
 body {
   margin: 0;
   background-color: var(--background);
+  transition: background-color 0.2s ease;
   font-family: "Lucida Grande", Verdana, sans-serif;
 }
 

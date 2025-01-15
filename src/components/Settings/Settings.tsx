@@ -1,5 +1,6 @@
 import { ISettingsProps } from "../../types/props";
-import SettingElement from "./SettingElement/SettingElement";
+import SettingBooleanElement from "./SettingBooleanElement/SettingBooleanElement";
+import SettingTimeElement from "./SettingTimeElement/SettingTimeElement";
 import useStyles from "./styles";
 
 const Settings: React.FC<ISettingsProps> = ({
@@ -7,6 +8,8 @@ const Settings: React.FC<ISettingsProps> = ({
   setIsDarkModeOn,
   isShowWrongWord,
   setIsShowWrongWord,
+  timeNextWord,
+  setTimeNextWord,
 }) => {
   const classes = useStyles();
 
@@ -14,7 +17,7 @@ const Settings: React.FC<ISettingsProps> = ({
     <div className={classes.container}>
       <ul>
         <li>
-          <SettingElement
+          <SettingBooleanElement
             title="Dark Mode"
             memoryKey="darkMode"
             isTurnOn={isDarkModeOn}
@@ -22,11 +25,19 @@ const Settings: React.FC<ISettingsProps> = ({
           />
         </li>
         <li>
-          <SettingElement
+          <SettingBooleanElement
             title="Show wrong word"
             memoryKey="showWrongWord"
             isTurnOn={isShowWrongWord}
             setIsTurnOn={setIsShowWrongWord}
+          />
+        </li>
+        <li>
+          <SettingTimeElement
+            title="Time until the next word"
+            memoryKey="timeNextWord"
+            timeNextWord={timeNextWord}
+            setTimeNextWord={setTimeNextWord}
           />
         </li>
       </ul>

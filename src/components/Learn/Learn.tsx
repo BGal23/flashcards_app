@@ -9,8 +9,14 @@ import SpinnerButton from "../Buttons/SpinnerButton/SpinnerButton";
 import color from "../../assets/colors";
 import CheckButton from "../Buttons/CheckButton/CheckButton";
 import levenshteinDistance from "../../utils/levenshteinDistance";
+import { FaArrowAltCircleRight } from "react-icons/fa";
+import { getFromLocalStorage } from "../../utils/localStorage";
 
-const Learn: React.FC<ILearnProps> = ({ isShowWrongWord, setMainView }) => {
+const Learn: React.FC<ILearnProps> = ({
+  isShowWrongWord,
+  timeNextWord,
+  setMainView,
+}) => {
   const [word, setWord] = useState<IFinalObject>();
   const [isArrayEmpty, setIsArrayEmpty] = useState<boolean>(false);
   const [inputPlace, setInputPlace] = useState<string>("");
@@ -33,7 +39,8 @@ const Learn: React.FC<ILearnProps> = ({ isShowWrongWord, setMainView }) => {
   };
 
   useEffect(() => {
-    const total = localStorage.getItem("total");
+    const total = getFromLocalStorage("total");
+
     if (Number(total) === 0) {
       localStorage.removeItem("currentWord");
       setIsArrayEmpty(true);
@@ -74,7 +81,7 @@ const Learn: React.FC<ILearnProps> = ({ isShowWrongWord, setMainView }) => {
       timerID.current = window.setTimeout(() => {
         restartWord();
         setWrongAnswer("");
-      }, 5000);
+      }, timeNextWord);
       setInputPlace("");
     } else {
       console.error("Data error");
@@ -94,9 +101,16 @@ const Learn: React.FC<ILearnProps> = ({ isShowWrongWord, setMainView }) => {
   return (
     <div className={classes.container}>
       {isArrayEmpty ? (
-        <button type="button" onClick={() => setMainView("add")}>
-          Add new word
-        </button>
+        <div className={classes.addInfoWrapper}>
+          <div>Add new word</div>
+          <button
+            className={classes.addIcon}
+            type="button"
+            onClick={() => setMainView("add")}
+          >
+            <FaArrowAltCircleRight size="2em" color={color.fontBlack} />
+          </button>
+        </div>
       ) : (
         <div className={classes.mainWord}>
           {isShowInfo ? word?.learning : word?.original}
@@ -109,7 +123,11 @@ const Learn: React.FC<ILearnProps> = ({ isShowWrongWord, setMainView }) => {
               {wrongAnswer}
             </div>
           )}
-          <SpinnerButton correctWord={restartWord} color={colorAnswer} />
+          <SpinnerButton
+            correctWord={restartWord}
+            color={colorAnswer}
+            time={timeNextWord}
+          />
         </>
       ) : (
         <>

@@ -19,7 +19,6 @@ const useStyles = makeStyles(() =>
       "@media (min-width: 540px)": {
         width: "520px",
       },
-      // maxWidth: "520px",
     },
   })
 );

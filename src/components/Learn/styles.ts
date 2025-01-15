@@ -25,18 +25,25 @@ const useStyles = makeStyles(() =>
       fontStyle: "italic",
       color: color.fontBlack,
     },
-    addButton: {
-      border: "none",
-      padding: "0.3em 0.4em 0.3em 0.8em",
-      background: color.headerButton,
-      boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
-      borderRadius: "2em",
+    addInfoWrapper: {
       display: "flex",
       alignItems: "center",
+      justifyContent: "center",
       gap: "0.5em",
-      fontSize: "1em",
-      marginRight: "1em",
+      margin: "0.5em 0 1em",
+      fontSize: "1.7em",
       color: color.fontBlack,
+    },
+    addIcon: {
+      height: "3em",
+      width: "3em",
+      border: "none",
+      background: color.headerButton,
+      boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      borderRadius: "0.5em",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
   })
 );

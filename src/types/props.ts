@@ -19,6 +19,7 @@ export interface IFiltersProps {
 
 export interface ILearnProps {
   isShowWrongWord: boolean;
+  timeNextWord: number;
   setMainView: (mainView: string) => void;
 }
 
@@ -27,17 +28,28 @@ export interface ISettingsProps {
   setIsDarkModeOn: (isDarkModeOn: boolean) => void;
   isShowWrongWord: boolean;
   setIsShowWrongWord: (isShowWrongWord: boolean) => void;
+  timeNextWord: number;
+  setTimeNextWord: (timeNextWord: number) => void;
 }
 
 export interface ITranslateProps {
   test: string;
 }
 
-export interface ISettingElementProps {
+// SETTINGS
+
+export interface ISettingBooleanElementProps {
   title: string;
   memoryKey: string;
   isTurnOn: boolean;
   setIsTurnOn: (fun: boolean) => void;
+}
+
+export interface ISettingTimeElementProps {
+  title: string;
+  memoryKey: string;
+  timeNextWord: number;
+  setTimeNextWord: (timeNextWord: number) => void;
 }
 
 // ELEMENTS
@@ -104,6 +116,7 @@ export interface IDeleteButtonProps {
 export interface ISpinnerButtonProps {
   correctWord: () => void;
   color: string;
+  time: number;
 }
 
 export interface IAddButtonProps {

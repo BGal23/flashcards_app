@@ -23,8 +23,8 @@ const useStyles = makeStyles(() =>
       width: "100px",
       background: color.shadow,
       position: "relative",
-      transition: "transform 4900ms linear",
       transform: "translatex(-100px)",
+      opacity: 0.3,
     },
     button: {
       height: "100px",
