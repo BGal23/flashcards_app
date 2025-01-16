@@ -15,7 +15,7 @@ const Settings: React.FC<ISettingsProps> = ({
 
   return (
     <div className={classes.container}>
-      <ul>
+      <ul className={classes.list}>
         <li>
           <SettingBooleanElement
             title="Dark Mode"

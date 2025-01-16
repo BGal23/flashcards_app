@@ -37,8 +37,16 @@ const EditElement: React.FC<IEditElementProps> = ({
   });
 
   const inputs = [
-    { value: originalWord, setValue: setOriginalWord },
-    { value: learningWord, setValue: setLearningWord },
+    {
+      id: `${originalWord}-id`,
+      value: originalWord,
+      setValue: setOriginalWord,
+    },
+    {
+      id: `${learningWord}-id`,
+      value: learningWord,
+      setValue: setLearningWord,
+    },
   ];
 
   return (
@@ -50,9 +58,10 @@ const EditElement: React.FC<IEditElementProps> = ({
     >
       {isEdited ? (
         <>
-          {inputs.map((input, index) => (
+          {inputs.map((input) => (
             <input
-              key={index}
+              id={input.id}
+              key={input.id}
               style={getInputStyle(input.value)}
               className={classes.input}
               type="text"
@@ -62,6 +71,7 @@ const EditElement: React.FC<IEditElementProps> = ({
             />
           ))}
           <textarea
+            id={`textarea-${originalWord}-id`}
             className={classes.textarea}
             value={descriptionText}
             onChange={(event) => setDescriptionText(event.target.value)}

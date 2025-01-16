@@ -10,6 +10,7 @@ const CheckInput: React.FC<ICheckInputProps> = ({
     <div className={classes.inputWrapper}>
       <input
         type="text"
+        id="check-input"
         className={classes.input}
         value={checkedWord}
         onChange={(event) => setCheckedWord(event.target.value)}

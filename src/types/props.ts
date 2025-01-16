@@ -8,10 +8,6 @@ export interface IHeaderProps {
   mainView: string;
 }
 
-export interface IAddProps {
-  test: string;
-}
-
 export interface IFiltersProps {
   setUsedFilter: (usedFilter: string) => void;
   usedFilter: string;
@@ -30,10 +26,6 @@ export interface ISettingsProps {
   setIsShowWrongWord: (isShowWrongWord: boolean) => void;
   timeNextWord: number;
   setTimeNextWord: (timeNextWord: number) => void;
-}
-
-export interface ITranslateProps {
-  test: string;
 }
 
 // SETTINGS
@@ -90,6 +82,7 @@ export interface IAddInputProps {
   changeValue: (value: string) => void;
   error?: string;
   icon?: ReactNode;
+  id: string;
 }
 
 // BUTTONS

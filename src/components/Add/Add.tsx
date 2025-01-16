@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { IAddProps } from "../../types/props";
 import AddButton from "../Buttons/AddButton/AddButton";
 import AddInput from "../Inputs/AddInput/AddInput";
 import useStyles from "./styles";
@@ -9,7 +8,7 @@ import { Slider } from "@mui/material";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa6";
 import color from "../../assets/colors";
 
-const Add: React.FC<IAddProps> = () => {
+const Add = () => {
   const [originalWord, setOriginalWord] = useState<string>("");
   const [learningWord, setLearningWord] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -50,6 +49,7 @@ const Add: React.FC<IAddProps> = () => {
   return (
     <div className={classes.container}>
       <AddInput
+        id={"original-id"}
         placeholder={"Your language..."}
         isDescription={false}
         value={originalWord}
@@ -58,6 +58,7 @@ const Add: React.FC<IAddProps> = () => {
         icon={<TbAlphabetLatin size={"3em"} color={color.fontBlack} />}
       />
       <AddInput
+        id={"learning-id"}
         placeholder={"Translate..."}
         isDescription={false}
         value={learningWord}
@@ -66,6 +67,7 @@ const Add: React.FC<IAddProps> = () => {
         icon={<TbAlphabetGreek size={"3em"} color={color.fontBlack} />}
       />
       <AddInput
+        id={"textarea-id"}
         placeholder={"Description (optional)"}
         isDescription={true}
         value={description}

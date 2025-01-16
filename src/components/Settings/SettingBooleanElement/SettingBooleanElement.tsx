@@ -20,7 +20,7 @@ const SettingBooleanElement: React.FC<ISettingBooleanElementProps> = ({
     <div className={classes.box}>
       <h4>{title}</h4>
       <Checkbox
-        id="checkbox"
+        id={memoryKey}
         onChange={handleChange}
         checked={Boolean(isTurnOn)}
         sx={{

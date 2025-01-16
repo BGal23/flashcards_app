@@ -11,6 +11,7 @@ const SearchInput: React.FC<ISearchInputProps> = ({
   return (
     <div className={classes.inputWrapper}>
       <input
+        id="search-input"
         type="text"
         className={classes.input}
         value={searchedWord}

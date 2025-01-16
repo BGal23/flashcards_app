@@ -8,6 +8,7 @@ const AddInput: React.FC<IAddInputProps> = ({
   value,
   changeValue,
   error,
+  id,
 }) => {
   const classes = useStyles();
 
@@ -15,6 +16,7 @@ const AddInput: React.FC<IAddInputProps> = ({
     <div className={classes.container}>
       {isDescription ? (
         <textarea
+          id={id}
           className={classes.textarea}
           placeholder={placeholder}
           value={value}
@@ -25,6 +27,7 @@ const AddInput: React.FC<IAddInputProps> = ({
         <span className={classes.inputWrapper}>
           {icon}
           <input
+            id={id}
             type="text"
             className={classes.input}
             placeholder={placeholder}

@@ -30,7 +30,7 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
   };
 
   const label = {
-    id: "checkbox",
+    id: id,
     checked: isActiveState,
     onChange: () => {
       changeItemFromLocalStorageById("data", id);

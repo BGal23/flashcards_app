@@ -53,10 +53,10 @@ const App = () => {
         return <List />;
 
       case "translate":
-        return <Translate test="temp" />;
+        return <Translate />;
 
       case "add":
-        return <Add test="temp" />;
+        return <Add />;
 
       case "settings":
         return (
