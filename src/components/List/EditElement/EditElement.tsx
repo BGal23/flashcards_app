@@ -1,51 +1,47 @@
 import { useEffect } from "react";
 import { IEditElementProps } from "../../../types/props";
 import useStyles from "./styles";
-import validateWord from "../../../utils/validateWord";
+import validate from "../../../utils/validate";
 import color from "../../../assets/colors";
 
 const EditElement: React.FC<IEditElementProps> = ({
   isEdited,
-  setIsWordsValidated,
-  originalWord,
-  learningWord,
-  descriptionText,
-  setOriginalWord,
-  setLearningWord,
-  setDescriptionText,
+  setIsValidated,
+  original,
+  learning,
+  description,
+  setOriginal,
+  setLearning,
+  setDescription,
   isActive,
+  id,
 }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (
-      validateWord(originalWord) === "" &&
-      validateWord(learningWord) === ""
-    ) {
-      setIsWordsValidated(true);
+    if (validate(original) === "" && validate(learning) === "") {
+      setIsValidated(true);
     } else {
-      setIsWordsValidated(false);
+      setIsValidated(false);
     }
-  }, [originalWord, learningWord, setIsWordsValidated]);
+  }, [original, learning, setIsValidated]);
 
   const getInputStyle = (word: string) => ({
-    color: validateWord(word) === "" ? "black" : color.error,
+    color: validate(word) === "" ? "black" : color.error,
     borderBottom:
-      validateWord(word) === ""
-        ? "1px solid black"
-        : `2px solid ${color.error}`,
+      validate(word) === "" ? "1px solid black" : `2px solid ${color.error}`,
   });
 
   const inputs = [
     {
-      id: `${originalWord}-id`,
-      value: originalWord,
-      setValue: setOriginalWord,
+      id: `original-${id}`,
+      value: original,
+      setValue: setOriginal,
     },
     {
-      id: `${learningWord}-id`,
-      value: learningWord,
-      setValue: setLearningWord,
+      id: `learning-{${id}`,
+      value: learning,
+      setValue: setLearning,
     },
   ];
 
@@ -71,25 +67,24 @@ const EditElement: React.FC<IEditElementProps> = ({
             />
           ))}
           <textarea
-            id={`textarea-${originalWord}-id`}
+            id={`textarea-${id}`}
             className={classes.textarea}
-            value={descriptionText}
-            onChange={(event) => setDescriptionText(event.target.value)}
+            value={description}
+            maxLength={90}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </>
       ) : (
         <>
-          {[originalWord, learningWord].map(
-            (element: string, index: number) => (
-              <span
-                key={index}
-                className={classes.text}
-                style={{ textDecoration: isActive ? "none" : "line-through" }}
-              >
-                {element}
-              </span>
-            )
-          )}
+          {[original, learning].map((element: string, index: number) => (
+            <span
+              key={index}
+              className={classes.text}
+              style={{ textDecoration: isActive ? "none" : "line-through" }}
+            >
+              {element}
+            </span>
+          ))}
         </>
       )}
     </div>

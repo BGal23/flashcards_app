@@ -1,11 +1,11 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import useStyles from "./styles";
 import { IEditButtonProps } from "../../../types/props";
 import { IoIosCloseCircle } from "react-icons/io";
 import color from "../../../assets/colors";
 import { FaEdit } from "react-icons/fa";
-import updateElement from "../../../utils/updateElement";
-import getElementById from "../../../utils/getElementById";
+import { useIndexedDB } from "react-indexed-db-hook";
+import { IObject } from "../../../types/data";
 
 const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
   (
@@ -14,25 +14,30 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
       updateData,
       isShownDelete,
       isEdited,
-      isWordsValidated,
-      originalWord,
-      learningWord,
-      descriptionText,
-      element: { id, original, learning, description },
+      isValidated,
+      original,
+      learning,
+      description,
+      element,
     },
     ref
   ) => {
     const classes = useStyles();
+    const { update, getByID } = useIndexedDB("data");
+    const [currentElement, setCurrentElement] = useState<IObject>(element);
+
+    useEffect(() => {
+      (async () => {
+        if (element.id) setCurrentElement(await getByID(element.id));
+      })();
+      // console.log(currentElement);
+    }, [element.id, getByID]);
 
     const handleOutClick = (event: MouseEvent) => {
       if (ref && "current" in ref && ref.current) {
         if (!ref.current.contains(event.target as Node)) {
           setIsEdited(false);
-          updateData({
-            originalWord: original,
-            learningWord: learning,
-            descriptionText: description,
-          });
+          updateData(currentElement);
           document.removeEventListener("mousedown", handleOutClick);
         }
       }
@@ -42,26 +47,20 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
       document.addEventListener("mousedown", handleOutClick);
 
       if (isEdit && isValidate) {
-        const oldElement = await getElementById(id);
-
-        if (!oldElement) {
-          console.error("Element not found");
-          return;
-        }
-
-        const {
-          originalWord: oldOriginal,
-          learningWord: oldLearning,
-          descriptionText: oldDescription,
-        } = oldElement;
-
         if (
-          oldOriginal !== originalWord ||
-          oldLearning !== learningWord ||
-          oldDescription !== descriptionText
+          currentElement.original !== original ||
+          currentElement.learning !== learning ||
+          currentElement.description !== description
         ) {
-          const editedElement = { originalWord, learningWord, descriptionText };
-          updateElement(id, editedElement);
+          const editedElement = {
+            original: original,
+            learning: learning,
+            description: description,
+          };
+          update({
+            ...currentElement,
+            ...editedElement,
+          });
           updateData(editedElement);
           setIsEdited(false);
         }
@@ -86,11 +85,7 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
           }}
           onClick={() => {
             setIsEdited(false);
-            updateData({
-              originalWord: original,
-              learningWord: learning,
-              descriptionText: description,
-            });
+            updateData(currentElement);
           }}
         >
           <IoIosCloseCircle
@@ -103,12 +98,12 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
           className={classes.button}
           style={{
             backgroundColor: isEdited
-              ? isWordsValidated
+              ? isValidated
                 ? color.activateButton
                 : color.error
               : color.fontGrey,
           }}
-          onClick={() => editElement(isEdited, isWordsValidated)}
+          onClick={() => editElement(isEdited, isValidated)}
         >
           <FaEdit size={"1.5em"} color={isEdited ? color.fontWhite : "black"} />
         </button>

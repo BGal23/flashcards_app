@@ -1,4 +1,4 @@
-const validateWord = (word: string) => {
+const validate = (word: string) => {
   if (word.length === 0) {
     return "Is empty";
   }
@@ -8,4 +8,4 @@ const validateWord = (word: string) => {
   return "";
 };
 
-export default validateWord;
+export default validate;

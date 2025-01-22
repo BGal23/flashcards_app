@@ -1,10 +1,11 @@
-import { IFinalObject } from "../types/data";
-import { getFromLocalStorage } from "./localStorage";
+import getAllData from "../db/getAllData";
+import { IObject } from "../types/data";
 
+type GetAllFunction = () => Promise<IObject[]>;
 let previousIndex: number | null = null;
 
-const wordDraw = async (): Promise<IFinalObject | null> => {
-  const array: IFinalObject[] = await getFromLocalStorage("data");
+const wordDraw = async (getAll: GetAllFunction): Promise<IObject | null> => {
+  const array: IObject[] = await getAllData(getAll);
   if (!array || array.length === 0) {
     return null;
   }
@@ -23,7 +24,7 @@ const wordDraw = async (): Promise<IFinalObject | null> => {
   return onlyActiveWords[randomNumber];
 };
 
-const getRandomNumber = (n: number): number => {
+const getRandomNumber = (n: number) => {
   return Math.floor(Math.random() * n);
 };
 

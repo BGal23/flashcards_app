@@ -1,12 +1,5 @@
 export interface IObject {
-  originalWord: string;
-  learningWord: string;
-  description?: string;
-  scale: number;
-}
-
-export interface IFinalObject {
-  id: string;
+  id?: number;
   original: string;
   learning: string;
   description?: string;
@@ -15,7 +8,7 @@ export interface IFinalObject {
 }
 
 export interface IUpdateObject {
-  originalWord: string;
-  learningWord: string;
-  descriptionText?: string;
+  original: string;
+  learning: string;
+  description?: string;
 }

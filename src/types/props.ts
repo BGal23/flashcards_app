@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IFinalObject, IObject, IUpdateObject } from "./data";
+import { IObject, IUpdateObject } from "./data";
 
 // COMPONENTS
 
@@ -47,20 +47,21 @@ export interface ISettingTimeElementProps {
 // ELEMENTS
 
 export interface IListElementProps {
-  element: IFinalObject;
+  element: IObject;
 }
 
 export interface IEditElementProps {
   isEdited: boolean;
-  isWordsValidated: boolean;
-  setIsWordsValidated: (isWordsValidated: boolean) => void;
-  originalWord: string;
-  learningWord: string;
-  descriptionText: string | undefined;
-  setOriginalWord: (originalWord: string) => void;
-  setLearningWord: (learningWord: string) => void;
-  setDescriptionText: (descriptionText: string | undefined) => void;
+  isValidated: boolean;
+  setIsValidated: (isValidated: boolean) => void;
+  original: string;
+  learning: string;
+  description: string | undefined;
+  setOriginal: (original: string) => void;
+  setLearning: (learning: string) => void;
+  setDescription: (description: string | undefined) => void;
   isActive: boolean;
+  id: number | undefined;
 }
 
 // INPUTS
@@ -91,11 +92,11 @@ export interface IEditButtonProps {
   isEdited: boolean;
   isShownDelete: boolean;
   setIsEdited: (isEdited: boolean) => void;
-  isWordsValidated: boolean;
-  originalWord: string;
-  learningWord: string;
-  descriptionText: string | undefined;
-  element: IFinalObject;
+  isValidated: boolean;
+  original: string;
+  learning: string;
+  description: string | undefined;
+  element: IObject;
   updateData: (element: IUpdateObject) => void;
 }
 
@@ -103,7 +104,7 @@ export interface IDeleteButtonProps {
   isShownDelete: boolean;
   setIsShownDelete: (isShownDelete: boolean) => void;
   setIsDelete: (isDelete: boolean) => void;
-  id: string;
+  id: number | undefined;
 }
 
 export interface ISpinnerButtonProps {
@@ -116,7 +117,7 @@ export interface IAddButtonProps {
   dataObject: IObject | undefined;
   clearData: (clear: boolean) => void;
   activate: (isActivate: boolean) => void;
-  isWordsValidated: boolean;
+  isValidated: boolean;
 }
 
 export interface ICheckButtonProps {

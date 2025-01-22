@@ -2,36 +2,33 @@ import { useEffect, useState } from "react";
 import AddButton from "../Buttons/AddButton/AddButton";
 import AddInput from "../Inputs/AddInput/AddInput";
 import useStyles from "./styles";
-import validateWord from "../../utils/validateWord";
+import validate from "../../utils/validate";
 import { TbAlphabetLatin, TbAlphabetGreek } from "react-icons/tb";
 import { Slider } from "@mui/material";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa6";
 import color from "../../assets/colors";
 
 const Add = () => {
-  const [originalWord, setOriginalWord] = useState<string>("");
-  const [learningWord, setLearningWord] = useState<string>("");
+  const [original, setOriginal] = useState<string>("");
+  const [learning, setLearning] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [scale, setScale] = useState<number>(0);
   const [isAddButtonActive, setIsAddButtonActive] = useState<boolean>(false);
-  const [isWordsValidated, setIsWordsValidated] = useState<boolean>(false);
+  const [isValidated, setIsValidated] = useState<boolean>(false);
   const classes = useStyles();
 
   useEffect(() => {
-    if (
-      validateWord(originalWord) === "" &&
-      validateWord(learningWord) === ""
-    ) {
-      setIsWordsValidated(true);
+    if (validate(original) === "" && validate(learning) === "") {
+      setIsValidated(true);
     } else {
-      setIsWordsValidated(false);
+      setIsValidated(false);
     }
-  }, [originalWord, learningWord]);
+  }, [original, learning]);
 
   const clearData = (clear: boolean) => {
     if (clear) {
-      setOriginalWord("");
-      setLearningWord("");
+      setOriginal("");
+      setLearning("");
       setDescription("");
       setScale(0);
       setIsAddButtonActive(false);
@@ -40,10 +37,11 @@ const Add = () => {
   };
 
   const dataObject = {
-    originalWord: originalWord.trimEnd(),
-    learningWord: learningWord.trimEnd(),
+    original: original.trimEnd(),
+    learning: learning.trimEnd(),
     description: description,
     scale: scale,
+    isActive: true,
   };
 
   return (
@@ -52,18 +50,18 @@ const Add = () => {
         id={"original-id"}
         placeholder={"Your language..."}
         isDescription={false}
-        value={originalWord}
-        changeValue={setOriginalWord}
-        error={(isAddButtonActive && validateWord(originalWord)) || ""}
+        value={original}
+        changeValue={setOriginal}
+        error={(isAddButtonActive && validate(original)) || ""}
         icon={<TbAlphabetLatin size={"3em"} color={color.fontBlack} />}
       />
       <AddInput
         id={"learning-id"}
         placeholder={"Translate..."}
         isDescription={false}
-        value={learningWord}
-        changeValue={setLearningWord}
-        error={(isAddButtonActive && validateWord(learningWord)) || ""}
+        value={learning}
+        changeValue={setLearning}
+        error={(isAddButtonActive && validate(learning)) || ""}
         icon={<TbAlphabetGreek size={"3em"} color={color.fontBlack} />}
       />
       <AddInput
@@ -91,7 +89,7 @@ const Add = () => {
       <AddButton
         dataObject={dataObject}
         clearData={clearData}
-        isWordsValidated={isWordsValidated}
+        isValidated={isValidated}
         activate={setIsAddButtonActive}
       />
     </div>

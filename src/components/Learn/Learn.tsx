@@ -2,22 +2,22 @@ import { useEffect, useState, useRef } from "react";
 import { ILearnProps } from "../../types/props";
 import useStyles from "./styles";
 import wordDraw from "../../utils/wordDraw";
-import { IFinalObject } from "../../types/data";
-import addPoint from "../../utils/addPoint";
+import { IObject } from "../../types/data";
 import CheckInput from "../Inputs/CheckInput/CheckInput";
 import SpinnerButton from "../Buttons/SpinnerButton/SpinnerButton";
 import color from "../../assets/colors";
 import CheckButton from "../Buttons/CheckButton/CheckButton";
 import levenshteinDistance from "../../utils/levenshteinDistance";
 import { FaArrowAltCircleRight } from "react-icons/fa";
-import { getFromLocalStorage } from "../../utils/localStorage";
+import { useIndexedDB } from "react-indexed-db-hook";
+import checkTotal from "../../db/checkTotal";
 
 const Learn: React.FC<ILearnProps> = ({
   isShowWrongWord,
   timeNextWord,
   setMainView,
 }) => {
-  const [word, setWord] = useState<IFinalObject>();
+  const [word, setWord] = useState<IObject>();
   const [isArrayEmpty, setIsArrayEmpty] = useState<boolean>(false);
   const [inputPlace, setInputPlace] = useState<string>("");
   const [colorAnswer, setColorAnswer] = useState<string>("");
@@ -25,11 +25,11 @@ const Learn: React.FC<ILearnProps> = ({
   const [wrongAnswer, setWrongAnswer] = useState<string>("");
   const classes = useStyles();
   const timerID = useRef<number | null>(null);
+  const { getAll, update } = useIndexedDB("data");
 
   const fetchWord = async (key: string, restart: boolean) => {
     const storageWord = localStorage.getItem(key);
-    const newWord = await wordDraw();
-
+    const newWord = await wordDraw(getAll);
     if (storageWord !== null && !restart) {
       setWord(JSON.parse(storageWord));
     } else if (newWord !== null) {
@@ -39,28 +39,25 @@ const Learn: React.FC<ILearnProps> = ({
   };
 
   useEffect(() => {
-    const total = getFromLocalStorage("total");
+    (async () => {
+      try {
+        setIsArrayEmpty(!(await checkTotal("MyDB", "data")));
+      } catch (error) {
+        console.error("Error checking store data:", error);
+      }
+    })();
 
-    if (Number(total) === 0) {
-      localStorage.removeItem("currentWord");
-      setIsArrayEmpty(true);
-    } else {
-      setIsArrayEmpty(false);
-    }
     fetchWord("currentWord", false);
   }, []);
 
-  const wordCheck = (
-    word: IFinalObject | undefined,
-    yourTranslation: string
-  ) => {
+  const wordCheck = (word: IObject | undefined, yourTranslation: string) => {
     if (word) {
       setIsShowInfo(true);
       if (
         word.learning.toLocaleLowerCase() ===
         yourTranslation.toLocaleLowerCase().trimEnd()
       ) {
-        addPoint(word.id, true);
+        update({ ...word, scale: word.scale + 1 });
         setColorAnswer(color.headerButton);
       } else if (
         levenshteinDistance(
@@ -71,7 +68,7 @@ const Learn: React.FC<ILearnProps> = ({
         setWrongAnswer(inputPlace);
         setColorAnswer(color.activateButton);
       } else {
-        addPoint(word.id, false);
+        update({ ...word, scale: word.scale - 1 });
         setWrongAnswer(inputPlace);
         setColorAnswer(color.error);
       }

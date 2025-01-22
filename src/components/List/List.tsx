@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import Filters from "../Filters/Filters";
 import SearchInput from "../Inputs/SearchInput/SearchInput";
 import useStyles from "./styles";
-import { getFromLocalStorage } from "../../utils/localStorage";
-import { IFinalObject } from "../../types/data";
+import { IObject } from "../../types/data";
 import ListElement from "./ListElement/ListElement";
+import { useIndexedDB } from "react-indexed-db-hook";
+import getAllData from "../../db/getAllData";
 
 const List = () => {
   const [usedFilter, setUsedFilter] = useState<string>("");
   const [searchedWord, setSearchedWord] = useState<string>("");
-  const [searchedList, setSearchedList] = useState<IFinalObject[]>([]);
-  const [list, setList] = useState<IFinalObject[]>([]);
+  const [searchedList, setSearchedList] = useState<IObject[]>([]);
+  const [list, setList] = useState<IObject[]>([]);
+  const { getAll } = useIndexedDB("data");
   const classes = useStyles();
 
   const sortList = (sort: string) => {
@@ -35,11 +37,14 @@ const List = () => {
   };
 
   useEffect(() => {
-    setList(getFromLocalStorage("data") || []);
-  }, []);
+    (async () => {
+      const data = await getAllData(getAll);
+      return setList(data);
+    })();
+  }, [getAll]);
 
   useEffect(() => {
-    const newList: IFinalObject[] = list.filter(
+    const newList: IObject[] = list.filter(
       (item) =>
         item.learning.toLowerCase().includes(searchedWord.toLowerCase()) ||
         item.original.toLowerCase().includes(searchedWord.toLowerCase())
@@ -60,7 +65,7 @@ const List = () => {
       <Filters usedFilter={usedFilter} setUsedFilter={setUsedFilter} />
       <div className={classes.listWrapper}>
         {searchedList.length > 0 ? (
-          searchedList.map((element: IFinalObject) => (
+          searchedList.map((element: IObject) => (
             <div key={element.id}>
               <ListElement element={element} />
             </div>

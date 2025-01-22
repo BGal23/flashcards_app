@@ -1,39 +1,39 @@
 import { IListElementProps } from "../../../types/props";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
-import { changeItemFromLocalStorageById } from "../../../utils/localStorage";
 import { useRef, useState } from "react";
 import scaleItemColor from "../../../utils/scaleItemColor";
 import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 import EditElement from "../EditElement/EditElement";
 import EditButton from "../../Buttons/EditButton/EditButton";
 import { IUpdateObject } from "../../../types/data";
+import { useIndexedDB } from "react-indexed-db-hook";
 
 const ListElement: React.FC<IListElementProps> = ({ element }) => {
-  const { id, isActive, scale, original, learning, description } = element;
   const [isDelete, setIsDelete] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
-  const [isActiveState, setIsActiveState] = useState<boolean>(isActive);
+  const [isActiveState, setIsActiveState] = useState<boolean>(element.isActive);
   const [isShownDelete, setIsShownDelete] = useState<boolean>(false);
-  const [isWordsValidated, setIsWordsValidated] = useState<boolean>(false);
-  const [originalWord, setOriginalWord] = useState<string>(original);
-  const [learningWord, setLearningWord] = useState<string>(learning);
-  const [descriptionText, setDescriptionText] = useState<string | undefined>(
-    description
+  const [isValidated, setIsValidated] = useState<boolean>(false);
+  const [original, setOriginal] = useState<string>(element.original);
+  const [learning, setLearning] = useState<string>(element.learning);
+  const [description, setDescription] = useState<string | undefined>(
+    element.description
   );
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const { update } = useIndexedDB("data");
 
   const updateData = async (newElement: IUpdateObject) => {
-    setOriginalWord(newElement.originalWord);
-    setLearningWord(newElement.learningWord);
-    setDescriptionText(newElement.descriptionText);
+    setOriginal(newElement.original);
+    setLearning(newElement.learning);
+    setDescription(newElement.description);
   };
 
   const label = {
-    id: id,
+    id: String(element.id),
     checked: isActiveState,
     onChange: () => {
-      changeItemFromLocalStorageById("data", id);
+      update({ ...element, isActive: !isActiveState });
       setIsActiveState(!isActiveState);
     },
   };
@@ -45,20 +45,21 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
       className={classes.container}
       style={{
         display: isDelete ? "none" : "flex",
-        background: scaleItemColor(scale),
+        background: scaleItemColor(element.scale),
         height: isEdited ? "7em" : "3em",
       }}
     >
       <EditElement
         isEdited={isEdited}
-        isWordsValidated={isWordsValidated}
-        setIsWordsValidated={setIsWordsValidated}
-        originalWord={originalWord}
-        learningWord={learningWord}
-        descriptionText={descriptionText}
-        setOriginalWord={setOriginalWord}
-        setLearningWord={setLearningWord}
-        setDescriptionText={setDescriptionText}
+        isValidated={isValidated}
+        setIsValidated={setIsValidated}
+        original={original}
+        learning={learning}
+        description={description}
+        id={element.id}
+        setOriginal={setOriginal}
+        setLearning={setLearning}
+        setDescription={setDescription}
         isActive={isActiveState}
       />
       <div className={classes.buttonsWrapper}>
@@ -76,13 +77,13 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
         )}
         <div className={classes.buttonsBox}>
           <EditButton
-            originalWord={originalWord}
-            learningWord={learningWord}
-            descriptionText={descriptionText}
+            original={original}
+            learning={learning}
+            description={description}
             isEdited={isEdited}
             isShownDelete={isShownDelete}
             setIsEdited={setIsEdited}
-            isWordsValidated={isWordsValidated}
+            isValidated={isValidated}
             element={element}
             updateData={updateData}
             ref={containerRef}
@@ -91,7 +92,7 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
             isShownDelete={isShownDelete}
             setIsShownDelete={setIsShownDelete}
             setIsDelete={setIsDelete}
-            id={id}
+            id={element.id}
           />
         </div>
       </div>

@@ -3,8 +3,8 @@ import { IDeleteButtonProps } from "../../../types/props";
 import { MdDelete } from "react-icons/md";
 import { IoIosCloseCircle } from "react-icons/io";
 import color from "../../../assets/colors";
-import { removeItemFromLocalStorageById } from "../../../utils/localStorage";
 import { useRef } from "react";
+import { useIndexedDB } from "react-indexed-db-hook";
 
 const DeleteButton: React.FC<IDeleteButtonProps> = ({
   setIsShownDelete,
@@ -14,6 +14,7 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({
 }) => {
   const classes = useStyles();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const { deleteRecord } = useIndexedDB("data");
 
   const handleOutClick = (event: Event) => {
     if (buttonRef.current) {
@@ -43,7 +44,7 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({
           setIsShownDelete(true);
           document.addEventListener("mousedown", handleOutClick);
 
-          if (isShownDelete) removeItemFromLocalStorageById("data", id);
+          if (isShownDelete && id) deleteRecord(id);
         }}
       >
         <MdDelete

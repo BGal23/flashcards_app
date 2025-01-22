@@ -8,6 +8,9 @@ import useSaveScreen from "./hooks/useSaveScreen";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { getFromLocalStorage } from "./utils/localStorage";
 import useStyles from "./styles";
+import { initDB } from "react-indexed-db-hook";
+import { DBConfig } from "./db/server";
+initDB(DBConfig);
 
 const App = () => {
   const [mainView, setMainView] = useSaveScreen("screen", "learn");
