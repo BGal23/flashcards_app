@@ -10,6 +10,7 @@ import { getFromLocalStorage } from "./utils/localStorage";
 import useStyles from "./styles";
 import { initDB } from "react-indexed-db-hook";
 import { DBConfig } from "./db/server";
+import PopUp from "./components/PopUp/PopUp";
 initDB(DBConfig);
 
 const App = () => {

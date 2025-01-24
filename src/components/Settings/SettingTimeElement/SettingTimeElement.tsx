@@ -31,7 +31,7 @@ const SettingTimeElement: React.FC<ISettingTimeElementProps> = ({
 
   return (
     <div className={classes.box}>
-      <h4>{title}</h4>
+      <h4 className={classes.title}>{title}</h4>
       <div className={classes.buttonsWrapper}>
         <button
           className={classes.button}

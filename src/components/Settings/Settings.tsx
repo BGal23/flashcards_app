@@ -1,5 +1,6 @@
 import { ISettingsProps } from "../../types/props";
 import SettingBooleanElement from "./SettingBooleanElement/SettingBooleanElement";
+import SettingClearData from "./SettingClearData/SettingClearData";
 import SettingTimeElement from "./SettingTimeElement/SettingTimeElement";
 import useStyles from "./styles";
 
@@ -39,6 +40,9 @@ const Settings: React.FC<ISettingsProps> = ({
             timeNextWord={timeNextWord}
             setTimeNextWord={setTimeNextWord}
           />
+        </li>
+        <li>
+          <SettingClearData title="Clear all data" memoryKey="clearData" />
         </li>
       </ul>
     </div>

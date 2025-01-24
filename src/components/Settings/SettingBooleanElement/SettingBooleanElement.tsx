@@ -18,7 +18,7 @@ const SettingBooleanElement: React.FC<ISettingBooleanElementProps> = ({
 
   return (
     <div className={classes.box}>
-      <h4>{title}</h4>
+      <h4 className={classes.title}>{title}</h4>
       <Checkbox
         id={memoryKey}
         onChange={handleChange}

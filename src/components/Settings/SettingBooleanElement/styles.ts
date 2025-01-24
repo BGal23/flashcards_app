@@ -9,6 +9,7 @@ const useStyles = makeStyles(() =>
       alignItems: "center",
       color: color.fontBlack,
     },
+    title: { margin: "10px 0 10px" },
   })
 );
 

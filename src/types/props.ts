@@ -44,6 +44,21 @@ export interface ISettingTimeElementProps {
   setTimeNextWord: (timeNextWord: number) => void;
 }
 
+export interface ISettingClearDataProps {
+  title: string;
+  memoryKey: string;
+}
+
+// MODAL
+
+export interface IPopUpProps {
+  color: string;
+  text: string;
+  time: number;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+
 // ELEMENTS
 
 export interface IListElementProps {
