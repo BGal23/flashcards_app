@@ -39,14 +39,16 @@ const AddButton: React.FC<IAddButtonProps> = ({
   };
 
   return (
-    <div className={classes.buttonWrapper}>
-      <button
-        type="button"
-        className={classes.button}
-        onClick={() => sendData()}
-      >
-        Add word <FaPlusCircle size={"2em"} color={color.fontBlack} />
-      </button>
+    <>
+      <div className={classes.buttonWrapper}>
+        <button
+          type="button"
+          className={classes.button}
+          onClick={() => sendData()}
+        >
+          Add word <FaPlusCircle size={"2em"} color={color.fontBlack} />
+        </button>
+      </div>
       <PopUp
         color={alertColor}
         text={alertText}
@@ -54,7 +56,7 @@ const AddButton: React.FC<IAddButtonProps> = ({
         isOpen={isOpenPopUp}
         setIsOpen={setIsOpenPopUp}
       />
-    </div>
+    </>
   );
 };
 

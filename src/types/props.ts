@@ -63,6 +63,9 @@ export interface IPopUpProps {
 
 export interface IListElementProps {
   element: IObject;
+  setIsOpenPopUp: (isOpen: boolean) => void;
+  setAlertColor: (color: string) => void;
+  setAlertText: (text: string) => void;
 }
 
 export interface IEditElementProps {
@@ -113,6 +116,9 @@ export interface IEditButtonProps {
   description: string | undefined;
   element: IObject;
   updateData: (element: IUpdateObject) => void;
+  setIsOpenPopUp: (isOpen: boolean) => void;
+  setAlertColor: (color: string) => void;
+  setAlertText: (text: string) => void;
 }
 
 export interface IDeleteButtonProps {
@@ -120,6 +126,9 @@ export interface IDeleteButtonProps {
   setIsShownDelete: (isShownDelete: boolean) => void;
   setIsDelete: (isDelete: boolean) => void;
   id: number | undefined;
+  setIsOpenPopUp: (isOpen: boolean) => void;
+  setAlertColor: (color: string) => void;
+  setAlertText: (text: string) => void;
 }
 
 export interface ISpinnerButtonProps {

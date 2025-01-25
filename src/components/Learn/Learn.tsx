@@ -45,6 +45,8 @@ const Learn: React.FC<ILearnProps> = ({
       } catch (error) {
         console.error("Error checking store data:", error);
       }
+
+      // alert(isArrayEmpty);
     })();
 
     fetchWord("currentWord", false);
@@ -132,7 +134,7 @@ const Learn: React.FC<ILearnProps> = ({
 
           <div className={classes.buttonsWrapper}>
             <CheckButton
-              isDisabled={false}
+              isDisabled={isArrayEmpty}
               wordCheck={() => wordCheck(word, inputPlace)}
               title="Skip"
               color={color.error}

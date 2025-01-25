@@ -7,7 +7,7 @@ const useStyles = makeStyles(() =>
       width: "calc(100vw - 4em)",
       height: "2.2em",
       background: "red",
-      position: "absolute",
+      position: "fixed",
       bottom: "-2.2em",
       right: "2em",
       borderRadius: "1.1em",

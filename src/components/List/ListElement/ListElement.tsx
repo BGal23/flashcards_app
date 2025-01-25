@@ -9,7 +9,12 @@ import EditButton from "../../Buttons/EditButton/EditButton";
 import { IUpdateObject } from "../../../types/data";
 import { useIndexedDB } from "react-indexed-db-hook";
 
-const ListElement: React.FC<IListElementProps> = ({ element }) => {
+const ListElement: React.FC<IListElementProps> = ({
+  element,
+  setIsOpenPopUp,
+  setAlertColor,
+  setAlertText,
+}) => {
   const [isDelete, setIsDelete] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
   const [isActiveState, setIsActiveState] = useState<boolean>(element.isActive);
@@ -87,12 +92,18 @@ const ListElement: React.FC<IListElementProps> = ({ element }) => {
             element={element}
             updateData={updateData}
             ref={containerRef}
+            setIsOpenPopUp={setIsOpenPopUp}
+            setAlertColor={setAlertColor}
+            setAlertText={setAlertText}
           />
           <DeleteButton
             isShownDelete={isShownDelete}
             setIsShownDelete={setIsShownDelete}
             setIsDelete={setIsDelete}
             id={element.id}
+            setIsOpenPopUp={setIsOpenPopUp}
+            setAlertColor={setAlertColor}
+            setAlertText={setAlertText}
           />
         </div>
       </div>

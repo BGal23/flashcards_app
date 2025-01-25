@@ -11,6 +11,9 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({
   setIsDelete,
   isShownDelete,
   id,
+  setIsOpenPopUp,
+  setAlertColor,
+  setAlertText,
 }) => {
   const classes = useStyles();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -22,6 +25,20 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({
         setIsShownDelete(false);
         document.removeEventListener("mousedown", handleOutClick);
       }
+    }
+  };
+
+  const handleDelete = () => {
+    setIsDelete(isShownDelete);
+    setIsShownDelete(true);
+    document.addEventListener("mousedown", handleOutClick);
+
+    if (isShownDelete && id) {
+      setIsOpenPopUp(true);
+      setAlertColor(color.error);
+      setAlertText("You deleted the item");
+
+      deleteRecord(id);
     }
   };
 
@@ -39,13 +56,7 @@ const DeleteButton: React.FC<IDeleteButtonProps> = ({
         style={{
           backgroundColor: isShownDelete ? color.error : color.fontGrey,
         }}
-        onClick={() => {
-          setIsDelete(isShownDelete);
-          setIsShownDelete(true);
-          document.addEventListener("mousedown", handleOutClick);
-
-          if (isShownDelete && id) deleteRecord(id);
-        }}
+        onClick={handleDelete}
       >
         <MdDelete
           size={"2em"}

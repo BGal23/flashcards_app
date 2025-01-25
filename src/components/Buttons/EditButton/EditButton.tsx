@@ -19,6 +19,9 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
       learning,
       description,
       element,
+      setIsOpenPopUp,
+      setAlertColor,
+      setAlertText,
     },
     ref
   ) => {
@@ -30,7 +33,6 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
       (async () => {
         if (element.id) setCurrentElement(await getByID(element.id));
       })();
-      // console.log(currentElement);
     }, [element.id, getByID]);
 
     const handleOutClick = (event: MouseEvent) => {
@@ -63,6 +65,9 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
           });
           updateData(editedElement);
           setIsEdited(false);
+          setIsOpenPopUp(true);
+          setAlertColor(color.headerButton);
+          setAlertText("You edited the item");
         }
       } else {
         setIsEdited(true);
@@ -70,44 +75,49 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
     };
 
     return (
-      <div
-        className={classes.container}
-        style={{
-          transform: isEdited ? "translateX(44px)" : "translateX(0)",
-          zIndex: !isShownDelete ? 2 : 0,
-        }}
-      >
-        <button
-          type="button"
-          className={classes.button}
+      <>
+        <div
+          className={classes.container}
           style={{
-            backgroundColor: isEdited ? color.activateButton : color.fontGrey,
-          }}
-          onClick={() => {
-            setIsEdited(false);
-            updateData(currentElement);
+            transform: isEdited ? "translateX(44px)" : "translateX(0)",
+            zIndex: !isShownDelete ? 2 : 0,
           }}
         >
-          <IoIosCloseCircle
-            size={"2em"}
-            color={isEdited ? color.fontWhite : "black"}
-          />
-        </button>
-        <button
-          type="button"
-          className={classes.button}
-          style={{
-            backgroundColor: isEdited
-              ? isValidated
-                ? color.activateButton
-                : color.error
-              : color.fontGrey,
-          }}
-          onClick={() => editElement(isEdited, isValidated)}
-        >
-          <FaEdit size={"1.5em"} color={isEdited ? color.fontWhite : "black"} />
-        </button>
-      </div>
+          <button
+            type="button"
+            className={classes.button}
+            style={{
+              backgroundColor: isEdited ? color.activateButton : color.fontGrey,
+            }}
+            onClick={() => {
+              setIsEdited(false);
+              updateData(currentElement);
+            }}
+          >
+            <IoIosCloseCircle
+              size={"2em"}
+              color={isEdited ? color.fontWhite : "black"}
+            />
+          </button>
+          <button
+            type="button"
+            className={classes.button}
+            style={{
+              backgroundColor: isEdited
+                ? isValidated
+                  ? color.activateButton
+                  : color.error
+                : color.fontGrey,
+            }}
+            onClick={() => editElement(isEdited, isValidated)}
+          >
+            <FaEdit
+              size={"1.5em"}
+              color={isEdited ? color.fontWhite : "black"}
+            />
+          </button>
+        </div>
+      </>
     );
   }
 );

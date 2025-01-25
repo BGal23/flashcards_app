@@ -6,6 +6,8 @@ import { IObject } from "../../types/data";
 import ListElement from "./ListElement/ListElement";
 import { useIndexedDB } from "react-indexed-db-hook";
 import getAllData from "../../db/getAllData";
+import PopUp from "../PopUp/PopUp";
+import color from "../../assets/colors";
 
 const List = () => {
   const [usedFilter, setUsedFilter] = useState<string>("");
@@ -14,6 +16,9 @@ const List = () => {
   const [list, setList] = useState<IObject[]>([]);
   const { getAll } = useIndexedDB("data");
   const classes = useStyles();
+  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
+  const [alertColor, setAlertColor] = useState<string>(color.background);
+  const [alertText, setAlertText] = useState<string>("");
 
   const sortList = (sort: string) => {
     const sortedList = [...searchedList];
@@ -57,26 +62,40 @@ const List = () => {
   }, [usedFilter]);
 
   return (
-    <div className={classes.container}>
-      <SearchInput
-        searchedWord={searchedWord}
-        setSearchedWord={setSearchedWord}
-      />
-      <Filters usedFilter={usedFilter} setUsedFilter={setUsedFilter} />
-      <div className={classes.listWrapper}>
-        {searchedList.length > 0 ? (
-          searchedList.map((element: IObject) => (
-            <div key={element.id}>
-              <ListElement element={element} />
+    <>
+      <div className={classes.container}>
+        <SearchInput
+          searchedWord={searchedWord}
+          setSearchedWord={setSearchedWord}
+        />
+        <Filters usedFilter={usedFilter} setUsedFilter={setUsedFilter} />
+        <div className={classes.listWrapper}>
+          {searchedList.length > 0 ? (
+            searchedList.map((element: IObject) => (
+              <div key={element.id}>
+                <ListElement
+                  element={element}
+                  setIsOpenPopUp={setIsOpenPopUp}
+                  setAlertColor={setAlertColor}
+                  setAlertText={setAlertText}
+                />
+              </div>
+            ))
+          ) : (
+            <div className={classes.emptyArray}>
+              <span>Your list is empty</span>
             </div>
-          ))
-        ) : (
-          <div className={classes.emptyArray}>
-            <span>Your list is empty</span>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+      <PopUp
+        color={alertColor}
+        text={alertText}
+        time={5000}
+        isOpen={isOpenPopUp}
+        setIsOpen={setIsOpenPopUp}
+      />
+    </>
   );
 };
 

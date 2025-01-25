@@ -28,6 +28,7 @@ const SettingClearData: React.FC<ISettingClearDataProps> = ({
           clear();
           setAlertColor(color.activateButton);
           setAlertText("All data was clear");
+          localStorage.removeItem("currentWord");
         } else {
           setAlertColor(color.error);
           setAlertText("Data is empty");
@@ -42,37 +43,39 @@ const SettingClearData: React.FC<ISettingClearDataProps> = ({
   };
 
   return (
-    <div className={classes.box}>
-      <h4 className={classes.title}>{title}</h4>
-      <div className={classes.buttonWrapper}>
-        <button
-          className={classes.button}
-          style={{
-            zIndex: isShownDelete ? 1 : -1,
-            position: "relative",
-            transform: isShownDelete
-              ? "translateX(-0.5em)"
-              : "translateX(2.5em)",
-            transition: "transform 500ms ease",
-          }}
-          type="button"
-          onClick={() => setIsShownDelete(false)}
-        >
-          <IoIosCloseCircle size={"2.3em"} color={color.background} />
-        </button>
-        <button
-          className={classes.button}
-          style={{
-            background: isShownDelete ? color.error : color.fontBlack,
-          }}
-          type="button"
-          onClick={handleClear}
-        >
-          <MdDelete
-            size={"2.3em"}
-            color={isShownDelete ? color.fontBlack : color.background}
-          />
-        </button>
+    <>
+      <div className={classes.box}>
+        <h4 className={classes.title}>{title}</h4>
+        <div className={classes.buttonWrapper}>
+          <button
+            className={classes.button}
+            style={{
+              zIndex: isShownDelete ? 1 : -1,
+              position: "relative",
+              transform: isShownDelete
+                ? "translateX(-0.5em)"
+                : "translateX(2.5em)",
+              transition: "transform 500ms ease",
+            }}
+            type="button"
+            onClick={() => setIsShownDelete(false)}
+          >
+            <IoIosCloseCircle size={"2.3em"} color={color.background} />
+          </button>
+          <button
+            className={classes.button}
+            style={{
+              background: isShownDelete ? color.error : color.fontBlack,
+            }}
+            type="button"
+            onClick={handleClear}
+          >
+            <MdDelete
+              size={"2.3em"}
+              color={isShownDelete ? color.fontBlack : color.background}
+            />
+          </button>
+        </div>
       </div>
       <PopUp
         color={alertColor}
@@ -81,7 +84,7 @@ const SettingClearData: React.FC<ISettingClearDataProps> = ({
         isOpen={isOpenPopUp}
         setIsOpen={setIsOpenPopUp}
       />
-    </div>
+    </>
   );
 };
 
