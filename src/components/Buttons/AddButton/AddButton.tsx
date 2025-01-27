@@ -11,6 +11,7 @@ const AddButton: React.FC<IAddButtonProps> = ({
   dataObject,
   clearData,
   isValidated,
+  disabled,
 }) => {
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [alertColor, setAlertColor] = useState<string>(color.background);
@@ -42,6 +43,10 @@ const AddButton: React.FC<IAddButtonProps> = ({
     <>
       <div className={classes.buttonWrapper}>
         <button
+          disabled={disabled}
+          style={{
+            opacity: disabled ? 0.5 : 1,
+          }}
           type="button"
           className={classes.button}
           onClick={() => sendData()}

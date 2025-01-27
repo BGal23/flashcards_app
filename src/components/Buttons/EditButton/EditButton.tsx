@@ -17,6 +17,7 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
       isValidated,
       original,
       learning,
+      category,
       description,
       element,
       setIsOpenPopUp,
@@ -52,11 +53,13 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
         if (
           currentElement.original !== original ||
           currentElement.learning !== learning ||
+          currentElement.category !== category ||
           currentElement.description !== description
         ) {
           const editedElement = {
             original: original,
             learning: learning,
+            category: category,
             description: description,
           };
           update({

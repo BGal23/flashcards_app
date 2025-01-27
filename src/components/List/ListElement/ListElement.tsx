@@ -22,6 +22,7 @@ const ListElement: React.FC<IListElementProps> = ({
   const [isValidated, setIsValidated] = useState<boolean>(false);
   const [original, setOriginal] = useState<string>(element.original);
   const [learning, setLearning] = useState<string>(element.learning);
+  const [category, setCategory] = useState<string>(element.category);
   const [description, setDescription] = useState<string | undefined>(
     element.description
   );
@@ -51,7 +52,7 @@ const ListElement: React.FC<IListElementProps> = ({
       style={{
         display: isDelete ? "none" : "flex",
         background: scaleItemColor(element.scale),
-        height: isEdited ? "7em" : "3em",
+        height: isEdited ? "9em" : "3em",
       }}
     >
       <EditElement
@@ -60,10 +61,12 @@ const ListElement: React.FC<IListElementProps> = ({
         setIsValidated={setIsValidated}
         original={original}
         learning={learning}
+        category={category}
         description={description}
         id={element.id}
         setOriginal={setOriginal}
         setLearning={setLearning}
+        setCategory={setCategory}
         setDescription={setDescription}
         isActive={isActiveState}
       />
@@ -84,6 +87,7 @@ const ListElement: React.FC<IListElementProps> = ({
           <EditButton
             original={original}
             learning={learning}
+            category={category}
             description={description}
             isEdited={isEdited}
             isShownDelete={isShownDelete}

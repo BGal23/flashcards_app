@@ -30,6 +30,11 @@ const useStyles = makeStyles(() =>
       padding: "0.3em",
       borderRadius: 5,
     },
+    select: {
+      fontSize: "0.9em",
+      borderRadius: 5,
+      border: "1px solid black",
+    },
   })
 );
 

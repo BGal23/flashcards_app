@@ -75,6 +75,8 @@ export interface IEditElementProps {
   original: string;
   learning: string;
   description: string | undefined;
+  category: string;
+  setCategory: (category: string) => void;
   setOriginal: (original: string) => void;
   setLearning: (learning: string) => void;
   setDescription: (description: string | undefined) => void;
@@ -96,12 +98,30 @@ export interface ICheckInputProps {
 
 export interface IAddInputProps {
   placeholder: string;
-  isDescription: boolean;
   value: string;
   changeValue: (value: string) => void;
-  error?: string;
-  icon?: ReactNode;
+  error: string;
+  icon: ReactNode;
   id: string;
+}
+
+export interface IAddTextareaProps {
+  placeholder: string;
+  value: string;
+  changeValue: (value: string) => void;
+  id: string;
+}
+
+export interface IAddOptionsProps {
+  id: string;
+  value: string;
+  icon: ReactNode;
+  changeValue: (value: string) => void;
+  categories: string[];
+  isOpenNewCategory: boolean;
+  setIsOpenNewCategory: (isOpenNewCategory: boolean) => void;
+  newCategory: string;
+  setNewCategory: (newCategory: string) => void;
 }
 
 // BUTTONS
@@ -113,6 +133,7 @@ export interface IEditButtonProps {
   isValidated: boolean;
   original: string;
   learning: string;
+  category: string;
   description: string | undefined;
   element: IObject;
   updateData: (element: IUpdateObject) => void;
@@ -142,6 +163,7 @@ export interface IAddButtonProps {
   clearData: (clear: boolean) => void;
   activate: (isActivate: boolean) => void;
   isValidated: boolean;
+  disabled: boolean;
 }
 
 export interface ICheckButtonProps {

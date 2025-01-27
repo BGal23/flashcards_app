@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IEditElementProps } from "../../../types/props";
 import useStyles from "./styles";
 import validate from "../../../utils/validate";
 import color from "../../../assets/colors";
+import checkCategories from "../../../db/checkCategories";
 
 const EditElement: React.FC<IEditElementProps> = ({
   isEdited,
@@ -10,13 +11,16 @@ const EditElement: React.FC<IEditElementProps> = ({
   original,
   learning,
   description,
+  category,
   setOriginal,
   setLearning,
   setDescription,
+  setCategory,
   isActive,
   id,
 }) => {
   const classes = useStyles();
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     if (validate(original) === "" && validate(learning) === "") {
@@ -25,6 +29,17 @@ const EditElement: React.FC<IEditElementProps> = ({
       setIsValidated(false);
     }
   }, [original, learning, setIsValidated]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const categoriesList = await checkCategories();
+        if (categoriesList) setCategories(categoriesList);
+      } catch (error) {
+        console.error("Error checking store data:", error);
+      }
+    })();
+  }, []);
 
   const getInputStyle = (word: string) => ({
     color: validate(word) === "" ? "black" : color.error,
@@ -66,6 +81,19 @@ const EditElement: React.FC<IEditElementProps> = ({
               onChange={(event) => input.setValue(event.target.value)}
             />
           ))}
+          <select
+            id={`category-{${id}`}
+            className={classes.select}
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+          >
+            <option value={""}>none</option>
+            {categories.map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
           <textarea
             id={`textarea-${id}`}
             className={classes.textarea}

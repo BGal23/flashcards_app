@@ -1,4 +1,5 @@
 export interface IObject {
+  category: string;
   id?: number;
   original: string;
   learning: string;
