@@ -9,7 +9,6 @@ const checkTotal = async (
       const db = request.result;
       const transaction = db.transaction(storeName, "readonly");
       const store = transaction.objectStore(storeName);
-
       const countRequest = store.count();
 
       countRequest.onsuccess = () => {

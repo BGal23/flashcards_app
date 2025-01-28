@@ -1,6 +1,6 @@
 const scaleItemColor = (scale: number): string => {
-  const minScale = -30;
-  const maxScale = 30;
+  const minScale = -20;
+  const maxScale = 20;
 
   const colorStart = { r: 247, g: 200, b: 201 }; // #f7c8c9
   const colorMiddle = { r: 255, g: 255, b: 255 }; // #ffffff

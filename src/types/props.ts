@@ -124,6 +124,11 @@ export interface IAddOptionsProps {
   setNewCategory: (newCategory: string) => void;
 }
 
+export interface ISelectCategoryProps {
+  category: string;
+  setCategory: (category: string) => void;
+}
+
 // BUTTONS
 
 export interface IEditButtonProps {

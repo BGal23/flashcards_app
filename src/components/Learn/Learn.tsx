@@ -11,6 +11,14 @@ import levenshteinDistance from "../../utils/levenshteinDistance";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { useIndexedDB } from "react-indexed-db-hook";
 import checkTotal from "../../db/checkTotal";
+import SelectCategory from "../Inputs/SelectCategory/SelectCategory";
+import { TiPencil } from "react-icons/ti";
+import { CgOptions } from "react-icons/cg";
+import { IoClose } from "react-icons/io5";
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+} from "../../utils/localStorage";
 
 const Learn: React.FC<ILearnProps> = ({
   isShowWrongWord,
@@ -23,19 +31,28 @@ const Learn: React.FC<ILearnProps> = ({
   const [colorAnswer, setColorAnswer] = useState<string>("");
   const [isShowInfo, setIsShowInfo] = useState<boolean>(false);
   const [wrongAnswer, setWrongAnswer] = useState<string>("");
+  const [isOpenOptions, setIsOpenOptions] = useState<boolean>(false);
+  const [category, setCategory] = useState<string>("");
   const classes = useStyles();
   const timerID = useRef<number | null>(null);
-  const { getAll, update } = useIndexedDB("data");
+  const { getAll, getByID, update } = useIndexedDB("data");
 
   const fetchWord = async (key: string, restart: boolean) => {
-    const storageWord = localStorage.getItem(key);
-    const newWord = await wordDraw(getAll);
-    if (storageWord !== null && !restart) {
-      setWord(JSON.parse(storageWord));
-    } else if (newWord !== null) {
-      localStorage.setItem(key, JSON.stringify(newWord));
-      setWord(newWord);
-    }
+    const storageWordId = localStorage.getItem(key);
+    const newWord = await wordDraw(getAll, category);
+
+    if (storageWordId !== null && !restart) {
+      const storageWord = await getByID(JSON.parse(storageWordId));
+      if (storageWord) setWord(storageWord);
+      else if (newWord !== null) saveNewWord(key, newWord);
+      else console.log("Data error, element doesn't exist!");
+    } else if (newWord !== null) saveNewWord(key, newWord);
+    else console.log("Data error, element doesn't exist!");
+  };
+
+  const saveNewWord = (key: string, newWord: IObject) => {
+    localStorage.setItem(key, JSON.stringify(newWord.id));
+    setWord(newWord);
   };
 
   useEffect(() => {
@@ -45,9 +62,15 @@ const Learn: React.FC<ILearnProps> = ({
       } catch (error) {
         console.error("Error checking store data:", error);
       }
-
-      // alert(isArrayEmpty);
     })();
+
+    const currentCategory = getFromLocalStorage("category");
+    if (currentCategory) {
+      setCategory(currentCategory);
+    } else {
+      saveToLocalStorage("category", "");
+      setCategory("");
+    }
 
     fetchWord("currentWord", false);
   }, []);
@@ -82,6 +105,7 @@ const Learn: React.FC<ILearnProps> = ({
         setWrongAnswer("");
       }, timeNextWord);
       setInputPlace("");
+      setIsOpenOptions(false);
     } else {
       console.error("Data error");
     }
@@ -146,7 +170,33 @@ const Learn: React.FC<ILearnProps> = ({
               color={color.headerButton}
             />
           </div>
-          <div className={classes.description}>{word?.description}</div>
+          <div
+            style={{
+              transform: isOpenOptions ? "translateY(-200px)" : "translateY(0)",
+            }}
+            className={classes.bottomWrapper}
+          >
+            <SelectCategory category={category} setCategory={setCategory} />
+
+            <div className={classes.description}>
+              <span className={classes.iconWrapper}>
+                <TiPencil size={"1em"} color={color.fontBlack} />
+                <div>Description</div>
+              </span>
+              {word?.description}
+            </div>
+          </div>
+          <button
+            className={classes.openButton}
+            type="button"
+            onClick={() => setIsOpenOptions(!isOpenOptions)}
+          >
+            {isOpenOptions ? (
+              <IoClose size={"2.3em"} color={color.fontBlack} />
+            ) : (
+              <CgOptions size={"2.3em"} color={color.fontBlack} />
+            )}
+          </button>
         </>
       )}
     </div>

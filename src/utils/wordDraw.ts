@@ -4,12 +4,23 @@ import { IObject } from "../types/data";
 type GetAllFunction = () => Promise<IObject[]>;
 let previousIndex: number | null = null;
 
-const wordDraw = async (getAll: GetAllFunction): Promise<IObject | null> => {
+const wordDraw = async (
+  getAll: GetAllFunction,
+  category: string
+): Promise<IObject | null> => {
+  let fromTheCategory = [];
   const array: IObject[] = await getAllData(getAll);
   if (!array || array.length === 0) {
     return null;
   }
-  const onlyActiveWords = array.filter((element) => element.isActive === true);
+  if (category !== "") {
+    fromTheCategory = array.filter((element) => element.category === category);
+  } else {
+    fromTheCategory = [...array];
+  }
+  const onlyActiveWords = fromTheCategory.filter(
+    (element) => element.isActive === true
+  );
 
   if (onlyActiveWords.length === 0) {
     return null;

@@ -14,7 +14,8 @@ const useStyles = makeStyles(() =>
       height: "2em",
       borderRadius: "1em",
       border: "none",
-      boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      boxShadow: `0.15em 0.3em 0 0 ${color.shadow}`,
+      appearance: "none",
       width: "100%",
     },
     selectWrapper: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles(() =>
       height: "2em",
       borderRadius: "1em",
       border: "none",
-      boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,
+      boxShadow: `0.15em 0.3em 0 0 ${color.shadow}`,
       width: "100%",
     },
     button: {
