@@ -34,7 +34,7 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
       (async () => {
         if (element.id) setCurrentElement(await getByID(element.id));
       })();
-    }, [element.id, getByID]);
+    }, [element.id, getByID, original, learning, description, category]);
 
     const handleOutClick = (event: MouseEvent) => {
       if (ref && "current" in ref && ref.current) {
@@ -71,6 +71,7 @@ const EditButton = forwardRef<HTMLDivElement, IEditButtonProps>(
           setIsOpenPopUp(true);
           setAlertColor(color.headerButton);
           setAlertText("You edited the item");
+          document.removeEventListener("mousedown", handleOutClick);
         }
       } else {
         setIsEdited(true);

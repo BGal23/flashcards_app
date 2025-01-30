@@ -11,5 +11,6 @@ export interface IObject {
 export interface IUpdateObject {
   original: string;
   learning: string;
+  category: string;
   description?: string;
 }

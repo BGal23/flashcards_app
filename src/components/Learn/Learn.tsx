@@ -8,13 +8,15 @@ import SpinnerButton from "../Buttons/SpinnerButton/SpinnerButton";
 import color from "../../assets/colors";
 import CheckButton from "../Buttons/CheckButton/CheckButton";
 import levenshteinDistance from "../../utils/levenshteinDistance";
-import { FaArrowAltCircleRight } from "react-icons/fa";
+import {
+  FaArrowAltCircleRight,
+  FaRegFolder,
+  FaRegFolderOpen,
+} from "react-icons/fa";
 import { useIndexedDB } from "react-indexed-db-hook";
 import checkTotal from "../../db/checkTotal";
 import SelectCategory from "../Inputs/SelectCategory/SelectCategory";
 import { TiPencil } from "react-icons/ti";
-import { CgOptions } from "react-icons/cg";
-import { IoClose } from "react-icons/io5";
 import {
   getFromLocalStorage,
   saveToLocalStorage,
@@ -192,9 +194,9 @@ const Learn: React.FC<ILearnProps> = ({
             onClick={() => setIsOpenOptions(!isOpenOptions)}
           >
             {isOpenOptions ? (
-              <IoClose size={"2.3em"} color={color.fontBlack} />
+              <FaRegFolderOpen size={"2em"} color={color.fontBlack} />
             ) : (
-              <CgOptions size={"2.3em"} color={color.fontBlack} />
+              <FaRegFolder size={"2em"} color={color.fontBlack} />
             )}
           </button>
         </>

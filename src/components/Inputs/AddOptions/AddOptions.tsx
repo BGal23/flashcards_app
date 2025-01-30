@@ -18,6 +18,7 @@ const AddOptions: React.FC<IAddOptionsProps> = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
+    if (newCategory !== selectedValue) setIsOpenNewCategory(false);
     changeValue(selectedValue);
     if (selectedValue !== "create") setNewCategory("");
   };
@@ -29,7 +30,10 @@ const AddOptions: React.FC<IAddOptionsProps> = ({
         <select
           id={id}
           className={classes.select}
-          style={{ color: value === "" ? "gray" : color.fontBlack }}
+          style={{
+            color: value === "" ? "gray" : color.fontBlack,
+            fontStyle: value === "create" ? "italic" : "normal",
+          }}
           value={value}
           onChange={handleChange}
         >
@@ -53,7 +57,9 @@ const AddOptions: React.FC<IAddOptionsProps> = ({
           <input
             className={classes.addInput}
             value={newCategory}
-            onChange={(event) => setNewCategory(event.target.value)}
+            onChange={(event) => {
+              setNewCategory(event.target.value);
+            }}
             placeholder="Enter new category"
           />
           <button

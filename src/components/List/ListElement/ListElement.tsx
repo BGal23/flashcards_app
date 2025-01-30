@@ -1,7 +1,7 @@
 import { IListElementProps } from "../../../types/props";
 import useStyles from "./styles";
 import { Checkbox } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import scaleItemColor from "../../../utils/scaleItemColor";
 import DeleteButton from "../../Buttons/DeleteButton/DeleteButton";
 import EditElement from "../EditElement/EditElement";
@@ -27,13 +27,39 @@ const ListElement: React.FC<IListElementProps> = ({
     element.description
   );
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { update } = useIndexedDB("data");
+  const { update, getByID } = useIndexedDB("data");
 
   const updateData = async (newElement: IUpdateObject) => {
     setOriginal(newElement.original);
     setLearning(newElement.learning);
     setDescription(newElement.description);
   };
+
+  useEffect(() => {
+    if (!isEdited) {
+      (async () => {
+        if (element.id) {
+          try {
+            const dataElement: IUpdateObject = await getByID(element.id);
+            setOriginal(dataElement.original);
+            setLearning(dataElement.learning);
+            setCategory(dataElement.category);
+            setDescription(dataElement.description);
+          } catch (error) {
+            console.error("Data error", error);
+          }
+        }
+      })();
+    }
+  }, [
+    original,
+    learning,
+    description,
+    category,
+    element.id,
+    getByID,
+    isEdited,
+  ]);
 
   const label = {
     id: String(element.id),
@@ -56,19 +82,19 @@ const ListElement: React.FC<IListElementProps> = ({
       }}
     >
       <EditElement
+        id={element.id}
         isEdited={isEdited}
+        isActive={isActiveState}
         isValidated={isValidated}
         setIsValidated={setIsValidated}
         original={original}
         learning={learning}
         category={category}
         description={description}
-        id={element.id}
         setOriginal={setOriginal}
         setLearning={setLearning}
         setCategory={setCategory}
         setDescription={setDescription}
-        isActive={isActiveState}
       />
       <div className={classes.buttonsWrapper}>
         {!isEdited && (

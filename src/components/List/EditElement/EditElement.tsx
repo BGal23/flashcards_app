@@ -23,12 +23,17 @@ const EditElement: React.FC<IEditElementProps> = ({
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    if (validate(original) === "" && validate(learning) === "") {
+    if (
+      validate(original) === "" &&
+      validate(learning) === "" &&
+      validate(category) === "" &&
+      isEdited
+    ) {
       setIsValidated(true);
     } else {
       setIsValidated(false);
     }
-  }, [original, learning, setIsValidated]);
+  }, [original, learning, description, category, setIsValidated, isEdited]);
 
   useEffect(() => {
     (async () => {
@@ -54,7 +59,7 @@ const EditElement: React.FC<IEditElementProps> = ({
       setValue: setOriginal,
     },
     {
-      id: `learning-{${id}`,
+      id: `learning-${id}`,
       value: learning,
       setValue: setLearning,
     },

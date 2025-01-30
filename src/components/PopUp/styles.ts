@@ -8,6 +8,7 @@ const useStyles = makeStyles(() =>
       height: "2.2em",
       background: "red",
       position: "fixed",
+      zIndex: 3,
       bottom: "-2.2em",
       right: "2em",
       borderRadius: "1.1em",
