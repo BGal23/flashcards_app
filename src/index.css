@@ -9,7 +9,8 @@
   --fontBlack: #000;
   --fontWhite: #fff;
   --fontGrey: #cfcfcf;
-  --input: #fff;
+  --input: #fbfbfb;
+  --link: blue;
 }
 
 .darkMode {
@@ -24,6 +25,7 @@
   --fontWhite: #fbfbf1;
   --fontGrey: #a1a1a1;
   --input: #424242;
+  --link: gold;
 }
 
 body {

@@ -15,7 +15,7 @@ export const DBConfig = {
           keypath: "description",
           options: { unique: false },
         },
-        { name: "isActive", keypath: "isActive", options: { unique: false } },
+        { name: "active", keypath: "active", options: { unique: false } },
         { name: "scale", keypath: "scale", options: { unique: false } },
       ],
     },

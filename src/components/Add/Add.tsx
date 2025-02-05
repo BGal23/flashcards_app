@@ -63,7 +63,7 @@ const Add = () => {
     category: category === "create" ? "" : category.trimEnd(),
     description: description,
     scale: scale,
-    isActive: true,
+    active: true,
   };
 
   return (

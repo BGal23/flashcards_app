@@ -1,6 +1,10 @@
 import useStyles from "./styles";
-import { FaBook, FaClipboardList, FaPlusCircle } from "react-icons/fa";
-import { MdGTranslate } from "react-icons/md";
+import {
+  FaBook,
+  FaClipboardList,
+  FaFileAlt,
+  FaPlusCircle,
+} from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 import { IHeaderProps } from "../../types/props";
 import HeaderButton from "../Buttons/HeaderButton/HeaderButton";
@@ -23,8 +27,8 @@ const Header: React.FC<IHeaderProps> = ({ setMainView, mainView }) => {
       icon: <FaClipboardList size="2.5em" color={color.fontBlack} />,
     },
     {
-      activate: "translate",
-      icon: <MdGTranslate size="2.5em" color={color.fontBlack} />,
+      activate: "files",
+      icon: <FaFileAlt size="2.5em" color={color.fontBlack} />,
     },
     {
       activate: "settings",

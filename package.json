@@ -22,7 +22,8 @@
     "react-indexed-db-hook": "^1.0.14",
     "react-window": "^1.8.10",
     "use-local-storage-state": "^19.4.1",
-    "uuid": "^11.0.2"
+    "uuid": "^11.0.2",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

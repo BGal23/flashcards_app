@@ -19,7 +19,7 @@ const wordDraw = async (
     fromTheCategory = [...array];
   }
   const onlyActiveWords = fromTheCategory.filter(
-    (element) => element.isActive === true
+    (element) => element.active === true
   );
 
   if (onlyActiveWords.length === 0) {

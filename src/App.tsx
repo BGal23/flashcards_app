@@ -2,7 +2,6 @@ import Header from "./components/Header/Header";
 import Learn from "./components/Learn/Learn";
 import Settings from "./components/Settings/Settings";
 import List from "./components/List/List";
-import Translate from "./components/Translate/Translate";
 import Add from "./components/Add/Add";
 import useSaveScreen from "./hooks/useSaveScreen";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -10,6 +9,7 @@ import { getFromLocalStorage } from "./utils/localStorage";
 import useStyles from "./styles";
 import { initDB } from "react-indexed-db-hook";
 import { DBConfig } from "./db/server";
+import Files from "./components/Files/Files";
 initDB(DBConfig);
 
 const App = () => {
@@ -55,8 +55,8 @@ const App = () => {
       case "list":
         return <List />;
 
-      case "translate":
-        return <Translate />;
+      case "files":
+        return <Files />;
 
       case "add":
         return <Add />;

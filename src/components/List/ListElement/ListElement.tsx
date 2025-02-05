@@ -17,7 +17,7 @@ const ListElement: React.FC<IListElementProps> = ({
 }) => {
   const [isDelete, setIsDelete] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
-  const [isActiveState, setIsActiveState] = useState<boolean>(element.isActive);
+  const [isActiveState, setIsActiveState] = useState<boolean>(element.active);
   const [isShownDelete, setIsShownDelete] = useState<boolean>(false);
   const [isValidated, setIsValidated] = useState<boolean>(false);
   const [original, setOriginal] = useState<string>(element.original);
@@ -65,7 +65,7 @@ const ListElement: React.FC<IListElementProps> = ({
     id: String(element.id),
     checked: isActiveState,
     onChange: () => {
-      update({ ...element, isActive: !isActiveState });
+      update({ ...element, active: !isActiveState });
       setIsActiveState(!isActiveState);
     },
   };

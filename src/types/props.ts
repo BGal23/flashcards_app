@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IObject, IUpdateObject } from "./data";
+import { IObject, ISort, IUpdateObject } from "./data";
 
 // COMPONENTS
 
@@ -11,6 +11,7 @@ export interface IHeaderProps {
 export interface IFiltersProps {
   setUsedFilter: (usedFilter: string) => void;
   usedFilter: string;
+  element: ISort[];
 }
 
 export interface ILearnProps {
@@ -26,6 +27,20 @@ export interface ISettingsProps {
   setIsShowWrongWord: (isShowWrongWord: boolean) => void;
   timeNextWord: number;
   setTimeNextWord: (timeNextWord: number) => void;
+}
+
+export interface IFileElement {
+  type: string;
+  formats: string[];
+  template?: string;
+  icon: ReactNode;
+}
+
+export interface IFileInputProps {
+  type: string;
+  file: File | null;
+  setFile: (file: File | null) => void;
+  icon: ReactNode;
 }
 
 // SETTINGS

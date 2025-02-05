@@ -10,6 +10,7 @@ const color = {
   fontGrey: `var(--fontGrey)`,
   input: `var(--input)`,
   background: "var(--background)",
+  link: "var(--link)",
 };
 
 export default color;
