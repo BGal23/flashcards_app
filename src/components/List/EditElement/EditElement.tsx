@@ -23,12 +23,7 @@ const EditElement: React.FC<IEditElementProps> = ({
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
-    if (
-      validate(original) === "" &&
-      validate(learning) === "" &&
-      validate(category) === "" &&
-      isEdited
-    ) {
+    if (validate(original) === "" && validate(learning) === "" && isEdited) {
       setIsValidated(true);
     } else {
       setIsValidated(false);

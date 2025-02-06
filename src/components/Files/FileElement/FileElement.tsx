@@ -25,9 +25,14 @@ const FileElement: React.FC<IFileElement> = ({
     if (file) {
       try {
         const newFileData = await excelImport(file);
-        newFileData.map((element) => add(element));
-        setAlertColor(color.headerButton);
-        setAlertText(`You have added ${newFileData.length} items`);
+        if (newFileData.length === 0) {
+          setAlertColor(color.error);
+          setAlertText(`Missing appropriate items`);
+        } else {
+          newFileData.map((element) => add(element));
+          setAlertColor(color.headerButton);
+          setAlertText(`You have added ${newFileData.length} items`);
+        }
       } catch (error) {
         setAlertColor(color.error);
         setAlertText(`Could not add items`);
@@ -51,7 +56,13 @@ const FileElement: React.FC<IFileElement> = ({
         .
       </p>
 
-      <FileInput file={file} setFile={setFile} icon={icon} type={type} />
+      <FileInput
+        file={file}
+        setFile={setFile}
+        icon={icon}
+        type={type}
+        formats={formats}
+      />
       <div className={classes.buttonWrapper}>
         <button
           style={{ opacity: file ? 1 : 0.5 }}

@@ -15,24 +15,34 @@ const excelImport = (file: File): Promise<IObject[]> => {
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
 
-        const jsonData = XLSX.utils.sheet_to_json<IObject>(sheet);
+        const jsonData = XLSX.utils.sheet_to_json<Record<string, undefined>>(
+          sheet,
+          {
+            header: 1,
+          }
+        );
 
-        const transformedData = jsonData.map((row) => {
-          const lowerCaseRow = Object.fromEntries(
-            Object.entries(row).map(([key, value]) => [
-              key.toLowerCase(),
-              value,
-            ])
-          );
+        if (jsonData.length === 0) {
+          reject("Sheet is empty.");
+          return;
+        }
 
-          return {
-            category: lowerCaseRow.category || "",
-            original: lowerCaseRow.original || "",
-            learning: lowerCaseRow.learning || "",
-            active: lowerCaseRow.active ?? true,
-            scale: lowerCaseRow.scale || 0,
-          };
-        });
+        jsonData.shift();
+
+        const transformedData = jsonData
+          .filter((row) => row[0] && row[1])
+          .map((row) => {
+            const transformedRow: IObject = {
+              original: row[0] || "",
+              learning: row[1] || "",
+              category: row[2] || "",
+              description: row[3] || "",
+              active: correctActiveValue(row[4]),
+              scale: Number(row[5]) || 0,
+            };
+
+            return transformedRow;
+          });
 
         resolve(transformedData);
       } else {
@@ -44,6 +54,15 @@ const excelImport = (file: File): Promise<IObject[]> => {
 
     reader.readAsArrayBuffer(file);
   });
+};
+
+const correctActiveValue = (value: string | undefined) => {
+  if (value) {
+    const lowerCaseValue = value.toLowerCase().trim();
+    if (lowerCaseValue === "false") {
+      return false;
+    } else return true;
+  } else return true;
 };
 
 export default excelImport;

@@ -8,6 +8,7 @@ const FileInput: React.FC<IFileInputProps> = ({
   setFile,
   icon,
   type,
+  formats,
 }) => {
   const [fileName, setFileName] = useState<string>("");
   const classes = useStyles();
@@ -26,7 +27,12 @@ const FileInput: React.FC<IFileInputProps> = ({
 
   return (
     <div className={classes.inputWrapper}>
-      <input id="file-input" type="file" onChange={handleFileChange} />
+      <input
+        id="file-input"
+        type="file"
+        onChange={handleFileChange}
+        accept={formats.map((element) => `.${element}`).join(",")}
+      />
       <label className={classes.label} htmlFor="file-input">
         <div className={classes.icon}>{icon}</div>
         <span

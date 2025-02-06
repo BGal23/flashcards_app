@@ -41,6 +41,7 @@ export interface IFileInputProps {
   file: File | null;
   setFile: (file: File | null) => void;
   icon: ReactNode;
+  formats: string[];
 }
 
 // SETTINGS
