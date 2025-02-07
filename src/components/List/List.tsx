@@ -8,7 +8,12 @@ import { useIndexedDB } from "react-indexed-db-hook";
 import getAllData from "../../db/getAllData";
 import PopUp from "../PopUp/PopUp";
 import color from "../../assets/colors";
-import { FaSortAlphaDown, FaSortAlphaDownAlt } from "react-icons/fa";
+import {
+  FaSortAlphaDown,
+  FaSortAlphaDownAlt,
+  FaSortAmountDown,
+  FaSortAmountDownAlt,
+} from "react-icons/fa";
 
 const filterElements: ISort[] = [
   {
@@ -24,12 +29,12 @@ const filterElements: ISort[] = [
   {
     id: 3,
     activate: "+>-",
-    icon: <FaSortAlphaDown size={"2.5em"} color={color.fontBlack} />,
+    icon: <FaSortAmountDown size={"2.5em"} color={color.fontBlack} />,
   },
   {
     id: 4,
     activate: "->+",
-    icon: <FaSortAlphaDownAlt size={"2.5em"} color={color.fontBlack} />,
+    icon: <FaSortAmountDownAlt size={"2.5em"} color={color.fontBlack} />,
   },
 ];
 
