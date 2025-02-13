@@ -8,7 +8,7 @@ const useStyles = makeStyles(() =>
     },
     listWrapper: {
       width: "calc(100% - 1em)",
-      height: "calc(100vh - 14.5em)",
+      height: "calc(100vh - 18em)",
       background: color.input,
       border: "none",
       boxShadow: `0.15em 0.3em 0px 0px ${color.shadow}`,

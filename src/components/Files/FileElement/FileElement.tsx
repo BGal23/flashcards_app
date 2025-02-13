@@ -7,6 +7,7 @@ import { FaFileImport } from "react-icons/fa";
 import excelImport from "../../../utils/excelImport";
 import { useIndexedDB } from "react-indexed-db-hook";
 import PopUp from "../../PopUp/PopUp";
+import pdfImport from "../../../utils/pdfImport";
 
 const FileElement: React.FC<IFileElement> = ({
   type,
@@ -24,7 +25,8 @@ const FileElement: React.FC<IFileElement> = ({
   const handleImport = async () => {
     if (file) {
       try {
-        const newFileData = await excelImport(file);
+        const newFileData =
+          type === "Excel" ? await excelImport(file) : await pdfImport(file);
         if (newFileData.length === 0) {
           setAlertColor(color.error);
           setAlertText(`Missing appropriate items`);
@@ -36,7 +38,7 @@ const FileElement: React.FC<IFileElement> = ({
       } catch (error) {
         setAlertColor(color.error);
         setAlertText(`Could not add items`);
-        console.error("Error importing Excel file:", error);
+        console.error(`Error importing ${type} file:", ${error}`);
       }
       setFile(null);
       setIsOpenPopUp(true);

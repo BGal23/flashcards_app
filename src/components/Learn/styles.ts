@@ -29,8 +29,8 @@ const useStyles = makeStyles(() =>
       alignItems: "center",
       justifyContent: "center",
       gap: "0.5em",
-      margin: "0.5em 0 1em",
-      fontSize: "1.7em",
+      margin: "0.5em 0 0.5em",
+      fontSize: "1.5em",
       color: color.fontBlack,
     },
     addIcon: {

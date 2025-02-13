@@ -54,7 +54,7 @@ const Files = () => {
           <FileElement
             type={"Pdf"}
             formats={["pdf"]}
-            template={"link"}
+            template={"https://bgal23.github.io/flashcards_app/Pdf_Temp.pdf"}
             icon={<FaFilePdf size="1.2em" />}
           />
         );

@@ -9,7 +9,8 @@ import color from "../../assets/colors";
 import CheckButton from "../Buttons/CheckButton/CheckButton";
 import levenshteinDistance from "../../utils/levenshteinDistance";
 import {
-  FaArrowAltCircleRight,
+  FaFileAlt,
+  FaPlusCircle,
   FaRegFolder,
   FaRegFolderOpen,
 } from "react-icons/fa";
@@ -47,9 +48,9 @@ const Learn: React.FC<ILearnProps> = ({
       const storageWord = await getByID(JSON.parse(storageWordId));
       if (storageWord) setWord(storageWord);
       else if (newWord !== null) saveNewWord(key, newWord);
-      else console.log("Data error, element doesn't exist!");
+      else console.error("Data error, element doesn't exist!");
     } else if (newWord !== null) saveNewWord(key, newWord);
-    else console.log("Data error, element doesn't exist!");
+    else console.error("Data error, element doesn't exist!");
   };
 
   const saveNewWord = (key: string, newWord: IObject) => {
@@ -126,79 +127,112 @@ const Learn: React.FC<ILearnProps> = ({
   return (
     <div className={classes.container}>
       {isArrayEmpty ? (
-        <div className={classes.addInfoWrapper}>
-          <div>Add new word</div>
-          <button
-            className={classes.addIcon}
-            type="button"
-            onClick={() => setMainView("add")}
-          >
-            <FaArrowAltCircleRight size="2em" color={color.fontBlack} />
-          </button>
-        </div>
-      ) : (
-        <div className={classes.mainWord}>
-          {isShowInfo ? word?.learning : word?.original}
-        </div>
-      )}
-      {isShowInfo ? (
         <>
-          {colorAnswer !== color.headerButton && isShowWrongWord && (
-            <div className={classes.mainWord} style={{ color: colorAnswer }}>
-              {wrongAnswer}
-            </div>
-          )}
-          <SpinnerButton
-            correctWord={restartWord}
-            color={colorAnswer}
-            time={timeNextWord}
-          />
+          <span
+            style={{
+              textAlign: "center",
+              color: color.fontBlack,
+              margin: "0.5em 0 0.5em",
+            }}
+          >
+            Your list is empty
+          </span>
+          <div className={classes.addInfoWrapper}>
+            <div>Add new word ⮕</div>
+            <button
+              className={classes.addIcon}
+              type="button"
+              onClick={() => setMainView("add")}
+            >
+              <FaPlusCircle size="2em" color={color.fontBlack} />
+            </button>
+          </div>
+          <div className={classes.addInfoWrapper}>
+            <div>Import from file ⮕</div>
+            <button
+              className={classes.addIcon}
+              type="button"
+              onClick={() => setMainView("files")}
+            >
+              <FaFileAlt size="2em" color={color.fontBlack} />
+            </button>
+          </div>
         </>
       ) : (
         <>
-          <CheckInput checkedWord={inputPlace} setCheckedWord={setInputPlace} />
-
-          <div className={classes.buttonsWrapper}>
-            <CheckButton
-              isDisabled={isArrayEmpty}
-              wordCheck={() => wordCheck(word, inputPlace)}
-              title="Skip"
-              color={color.error}
-            />
-            <CheckButton
-              isDisabled={inputPlace.length <= 0}
-              wordCheck={() => wordCheck(word, inputPlace)}
-              title="Check"
-              color={color.headerButton}
-            />
+          <div className={classes.mainWord}>
+            {isShowInfo ? word?.learning : word?.original}
           </div>
-          <div
-            style={{
-              transform: isOpenOptions ? "translateY(-200px)" : "translateY(0)",
-            }}
-            className={classes.bottomWrapper}
-          >
-            <SelectCategory category={category} setCategory={setCategory} />
 
-            <div className={classes.description}>
-              <span className={classes.iconWrapper}>
-                <TiPencil size={"1em"} color={color.fontBlack} />
-                <div>Description</div>
-              </span>
-              {word?.description}
-            </div>
-          </div>
-          <button
-            className={classes.openButton}
-            type="button"
-            onClick={() => setIsOpenOptions(!isOpenOptions)}
-          >
-            {isOpenOptions ? (
-              <FaRegFolderOpen size={"2em"} color={color.fontBlack} />
-            ) : (
-              <FaRegFolder size={"2em"} color={color.fontBlack} />
-            )}
-          </button>
+          {isShowInfo ? (
+            <>
+              {colorAnswer !== color.headerButton && isShowWrongWord && (
+                <div
+                  className={classes.mainWord}
+                  style={{ color: colorAnswer }}
+                >
+                  {wrongAnswer}
+                </div>
+              )}
+              <SpinnerButton
+                correctWord={restartWord}
+                color={colorAnswer}
+                time={timeNextWord}
+              />
+            </>
+          ) : (
+            <>
+              <CheckInput
+                checkedWord={inputPlace}
+                setCheckedWord={setInputPlace}
+              />
+
+              <div className={classes.buttonsWrapper}>
+                <CheckButton
+                  isDisabled={isArrayEmpty}
+                  wordCheck={() => wordCheck(word, inputPlace)}
+                  title="Skip"
+                  color={color.error}
+                />
+                <CheckButton
+                  isDisabled={inputPlace.length <= 0}
+                  wordCheck={() => wordCheck(word, inputPlace)}
+                  title="Check"
+                  color={color.headerButton}
+                />
+              </div>
+
+              <div
+                style={{
+                  transform: isOpenOptions
+                    ? "translateY(-200px)"
+                    : "translateY(0)",
+                }}
+                className={classes.bottomWrapper}
+              >
+                <SelectCategory category={category} setCategory={setCategory} />
+
+                <div className={classes.description}>
+                  <span className={classes.iconWrapper}>
+                    <TiPencil size={"1em"} color={color.fontBlack} />
+                    <div>Description</div>
+                  </span>
+                  {word?.description}
+                </div>
+              </div>
+              <button
+                className={classes.openButton}
+                type="button"
+                onClick={() => setIsOpenOptions(!isOpenOptions)}
+              >
+                {isOpenOptions ? (
+                  <FaRegFolderOpen size={"2em"} color={color.fontBlack} />
+                ) : (
+                  <FaRegFolder size={"2em"} color={color.fontBlack} />
+                )}
+              </button>
+            </>
+          )}
         </>
       )}
     </div>
