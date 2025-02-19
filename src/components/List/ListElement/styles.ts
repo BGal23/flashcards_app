@@ -23,7 +23,6 @@ const useStyles = makeStyles(() =>
       justifyContent: "space-between",
       gap: 8,
       paddingBottom: "0.5em",
-      height: 36,
     },
     buttonsBox: {
       display: "flex",

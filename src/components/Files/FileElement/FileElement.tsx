@@ -69,8 +69,8 @@ const FileElement: React.FC<IFileElement> = ({
         <button
           style={{ opacity: file ? 1 : 0.5 }}
           className={classes.button}
-          onClick={handleImport}
           disabled={file ? false : true}
+          onClick={handleImport}
           type="button"
         >
           <span>Import file</span>

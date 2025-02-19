@@ -8,6 +8,7 @@ import EditElement from "../EditElement/EditElement";
 import EditButton from "../../Buttons/EditButton/EditButton";
 import { IUpdateObject } from "../../../types/data";
 import { useIndexedDB } from "react-indexed-db-hook";
+import scaleColor from "../../../utils/scaleColor";
 
 const ListElement: React.FC<IListElementProps> = ({
   element,
@@ -109,32 +110,45 @@ const ListElement: React.FC<IListElementProps> = ({
             }}
           />
         )}
-        <div className={classes.buttonsBox}>
-          <EditButton
-            original={original}
-            learning={learning}
-            category={category}
-            description={description}
-            isEdited={isEdited}
-            isShownDelete={isShownDelete}
-            setIsEdited={setIsEdited}
-            isValidated={isValidated}
-            element={element}
-            updateData={updateData}
-            ref={containerRef}
-            setIsOpenPopUp={setIsOpenPopUp}
-            setAlertColor={setAlertColor}
-            setAlertText={setAlertText}
-          />
-          <DeleteButton
-            isShownDelete={isShownDelete}
-            setIsShownDelete={setIsShownDelete}
-            setIsDelete={setIsDelete}
-            id={element.id}
-            setIsOpenPopUp={setIsOpenPopUp}
-            setAlertColor={setAlertColor}
-            setAlertText={setAlertText}
-          />
+        <div>
+          <div className={classes.buttonsBox}>
+            <EditButton
+              original={original}
+              learning={learning}
+              category={category}
+              description={description}
+              isEdited={isEdited}
+              isShownDelete={isShownDelete}
+              setIsEdited={setIsEdited}
+              isValidated={isValidated}
+              element={element}
+              updateData={updateData}
+              ref={containerRef}
+              setIsOpenPopUp={setIsOpenPopUp}
+              setAlertColor={setAlertColor}
+              setAlertText={setAlertText}
+            />
+            <DeleteButton
+              isShownDelete={isShownDelete}
+              setIsShownDelete={setIsShownDelete}
+              setIsDelete={setIsDelete}
+              id={element.id}
+              setIsOpenPopUp={setIsOpenPopUp}
+              setAlertColor={setAlertColor}
+              setAlertText={setAlertText}
+            />
+          </div>
+          <b
+            style={{
+              display: isEdited ? "block" : "none",
+              textAlign: "center",
+              color: scaleColor(element.scale),
+              marginTop: "1em",
+              fontSize: "1.8em",
+            }}
+          >
+            {element.scale}
+          </b>
         </div>
       </div>
     </div>

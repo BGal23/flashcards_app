@@ -56,13 +56,16 @@ const excelImport = (file: File): Promise<IObject[]> => {
   });
 };
 
-const correctActiveValue = (value: string | undefined) => {
-  if (value) {
+const correctActiveValue = (value: string | boolean | undefined) => {
+  if (typeof value === "string") {
+    console.log(typeof value);
+
     const lowerCaseValue = value.toLowerCase().trim();
     if (lowerCaseValue === "false") {
       return false;
     } else return true;
-  } else return true;
+  } else if (value === true) return true;
+  else return false;
 };
 
 export default excelImport;

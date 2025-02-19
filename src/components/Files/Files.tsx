@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { ISort } from "../../types/data";
 import color from "../../assets/colors";
 import FileElement from "./FileElement/FileElement";
+import FileExport from "./FileExport/FileExport";
 
 const filesArray: ISort[] = [
   {
@@ -65,11 +66,7 @@ const Files = () => {
           </h3>
         );
       case "export-excel":
-        return (
-          <h3 style={{ textAlign: "center", color: color.fontBlack }}>
-            Coming soon
-          </h3>
-        );
+        return <FileExport />;
       default:
         break;
     }
