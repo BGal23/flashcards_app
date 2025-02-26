@@ -52,10 +52,9 @@ const useStyles = makeStyles(() =>
       display: "flex",
       flexDirection: "column",
       alignItems: "start",
-
       marginLeft: "1em",
       color: color.fontBlack,
-      gap: "2em",
+      gap: "1em",
       bottom: -160,
       transition: "transform 500ms ease",
     },

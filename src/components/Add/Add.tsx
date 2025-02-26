@@ -70,7 +70,7 @@ const Add = () => {
     <div className={classes.container}>
       <AddInput
         id={"original-id"}
-        placeholder={"Your language..."}
+        placeholder={"Native language..."}
         value={original}
         changeValue={setOriginal}
         error={(isAddButtonActive && validate(original)) || ""}
@@ -78,7 +78,7 @@ const Add = () => {
       />
       <AddInput
         id={"learning-id"}
-        placeholder={"Translate..."}
+        placeholder={"Learned language..."}
         value={learning}
         changeValue={setLearning}
         error={(isAddButtonActive && validate(learning)) || ""}

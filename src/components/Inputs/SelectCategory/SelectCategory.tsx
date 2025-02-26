@@ -40,7 +40,6 @@ const SelectCategory: React.FC<ISelectCategoryProps> = ({
           <select
             id="select-category"
             className={classes.select}
-            // style={{ color: value === "" ? "gray" : color.fontBlack }}
             value={category}
             onChange={(event) => handleCategory(event.target.value)}
           >
